@@ -5,7 +5,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Chenhao Sun's personal portfolio — projects, resume, and ways to connect." />
+    <meta name="description" content="Chenhao Sun's personal portfolio — about, projects, and interests." />
     <title>Chenhao Sun — Portfolio</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -15,66 +15,59 @@
   <body>
     <header class="titleblock">
       <nav class="container" aria-label="Main navigation">
-        <button class="brand" type="button" data-target="hero">Chenhao</button>
+        <button class="brand" type="button" data-target="about">Chenhao</button>
         <ul class="sheet-index">
-          <li><button type="button" data-target="about">Profile</button></li>
-          <li><button type="button" data-target="work">Work</button></li>
-          <li><button type="button" data-target="fun">Interests</button></li>
-          <li><button type="button" data-target="resume">Resume</button></li>
-          <li><button type="button" data-target="contact">Contact</button></li>
+          <li><button type="button" data-target="about">About</button></li>
+          <li><button type="button" data-target="work">Projects</button></li>
+          <li><button type="button" data-target="fun">Fun</button></li>
         </ul>
-        <!-- Add your real résumé PDF at assets/resume.pdf — this link points there -->
-        <a class="resume-link" href="/assets/resume.pdf" target="_blank" rel="noreferrer">Résumé</a>
       </nav>
     </header>
 
     <main id="top">
-      <section class="hero sheet" id="hero">
-        <svg class="hero-swirl" viewBox="0 0 100 100" fill="none" aria-hidden="true"><path d="M50,50 m0,-34 a34,34 0 1 1 -24,10 a22,22 0 1 1 16,6 a11,11 0 1 1 -8,3" stroke="currentColor" stroke-width="3"/></svg>
+      <section class="sheet" id="about">
         <div class="container">
-          <h1>Chenhao Sun</h1>
-          <!-- Replace with your role / tagline -->
-          <span class="role">[ Your role or tagline, e.g. software builder ]</span>
-          <!-- Replace with your one-line summary -->
-          <p class="summary">[ One or two sentences on what you build and what you're currently focused on. ]</p>
-          <div class="actions">
-            <a class="btn btn-primary" href="/assets/resume.pdf" target="_blank" rel="noreferrer">Download résumé</a>
-            <a class="btn btn-outline" href="https://github.com/bhenbao" target="_blank" rel="noreferrer">Open GitHub ↗</a>
-          </div>
-        </div>
-      </section>
-
-      <section class="about sheet" id="about">
-        <div class="container about-grid">
-          <div>
-            <svg class="swirl green" viewBox="0 0 100 100" fill="none" aria-hidden="true"><path d="M50,50 m0,-34 a34,34 0 1 1 -24,10 a22,22 0 1 1 16,6 a11,11 0 1 1 -8,3" stroke="currentColor" stroke-width="5"/></svg>
-            <h2>About</h2>
-            <!-- Replace with your real bio -->
-            <p>[ Write two or three sentences about who you are, what you're studying or working on, and what kind of problems you like to solve. ]</p>
-          </div>
-          <div class="specs">
-            <!-- Replace these rows with your real skills / interests, or add more rows -->
-            <div class="spec-row"><span class="k">Languages</span><span class="v">[ e.g. Python, TypeScript, Go ]</span></div>
-            <div class="spec-row"><span class="k">Focus</span><span class="v">[ e.g. backend systems, ML ]</span></div>
-            <div class="spec-row"><span class="k">Tools</span><span class="v">[ e.g. React, Docker, AWS ]</span></div>
-            <div class="spec-row"><span class="k">Based in</span><span class="v">[ City, Country ]</span></div>
-          </div>
-        </div>
-      </section>
-
-      <section class="work sheet" id="work">
-        <div class="container">
-          <div class="work-head">
-            <div>
-              <svg class="swirl lavender" viewBox="0 0 100 100" fill="none" aria-hidden="true"><path d="M50,50 m0,-34 a34,34 0 1 1 -24,10 a22,22 0 1 1 16,6 a11,11 0 1 1 -8,3" stroke="currentColor" stroke-width="5"/></svg>
-              <h2>Projects</h2>
+          <div class="about-intro">
+            <h1>Chenhao Sun</h1>
+            <!-- Replace with your role / tagline -->
+            <span class="role">[ Your role or tagline, e.g. software builder ]</span>
+            <!-- Replace with your one-line summary -->
+            <p class="summary">[ One or two sentences on what you build and what you're currently focused on. ]</p>
+            <div class="actions">
+              <!-- Add your real résumé PDF at assets/resume.pdf — this button links there -->
+              <a class="btn btn-primary" href="/assets/resume.pdf" target="_blank" rel="noreferrer">Resume</a>
+              <!-- Replace with your real email -->
+              <a class="btn btn-outline" href="mailto:[email protected]">Contact</a>
+              <a class="btn btn-outline" href="https://github.com/bhenbao" target="_blank" rel="noreferrer">GitHub ↗</a>
             </div>
+          </div>
+          <div class="about-grid">
+            <div>
+              <h2>About</h2>
+              <!-- Replace with your real bio -->
+              <p>[ Write two or three sentences about who you are, what you're studying or working on, and what kind of problems you like to solve. ]</p>
+            </div>
+            <div class="specs">
+              <!-- Replace these rows with your real skills / interests, or add more rows -->
+              <div class="spec-row"><span class="k">Languages</span><span class="v">[ e.g. Python, TypeScript, Go ]</span></div>
+              <div class="spec-row"><span class="k">Focus</span><span class="v">[ e.g. backend systems, ML ]</span></div>
+              <div class="spec-row"><span class="k">Tools</span><span class="v">[ e.g. React, Docker, AWS ]</span></div>
+              <div class="spec-row"><span class="k">Based in</span><span class="v">[ City, Country ]</span></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="sheet" id="work">
+        <div class="container">
+          <div class="section-head">
+            <h2>Projects</h2>
             <p>A few things I've built. Swap these placeholders for your real projects.</p>
           </div>
-          <div class="project-grid">
+          <div class="tile-grid">
 
             <!-- ▼▼▼ EDIT PROJECT 1 HERE ▼▼▼ -->
-            <article class="project-panel">
+            <article class="tile">
               <h3>[ Project name ]</h3>
               <p>[ One or two sentences on what it does and why you built it. ]</p>
               <a href="#" target="_blank" rel="noreferrer">View project ↗</a>
@@ -82,7 +75,7 @@
             <!-- ▲▲▲ END PROJECT 1 ▲▲▲ -->
 
             <!-- ▼▼▼ EDIT PROJECT 2 HERE ▼▼▼ -->
-            <article class="project-panel">
+            <article class="tile">
               <h3>[ Project name ]</h3>
               <p>[ One or two sentences on what it does and why you built it. ]</p>
               <a href="#" target="_blank" rel="noreferrer">View project ↗</a>
@@ -90,7 +83,7 @@
             <!-- ▲▲▲ END PROJECT 2 ▲▲▲ -->
 
             <!-- ▼▼▼ EDIT PROJECT 3 HERE ▼▼▼ -->
-            <article class="project-panel">
+            <article class="tile">
               <h3>[ Project name ]</h3>
               <p>[ One or two sentences on what it does and why you built it. ]</p>
               <a href="#" target="_blank" rel="noreferrer">View project ↗</a>
@@ -101,37 +94,38 @@
         </div>
       </section>
 
-      <section class="work sheet" id="fun">
+      <section class="sheet" id="fun">
         <div class="container">
-          <svg class="swirl green" viewBox="0 0 100 100" fill="none" aria-hidden="true"><path d="M50,50 m0,-34 a34,34 0 1 1 -24,10 a22,22 0 1 1 16,6 a11,11 0 1 1 -8,3" stroke="currentColor" stroke-width="5"/></svg>
-          <h2>Off the clock</h2>
+          <div class="section-head">
+            <h2>Off the clock</h2>
+          </div>
           <!-- Replace with a line about what you do outside of code -->
           <p class="fun-intro">[ One line about what you're into outside of work — this is the section that makes you a real person to whoever's reading. ]</p>
-          <div class="fun-grid">
+          <div class="tile-grid two-col">
 
             <!-- ▼▼▼ EDIT HOBBY 1 HERE ▼▼▼ -->
-            <article class="project-panel">
+            <article class="tile">
               <h3>[ Hobby or interest ]</h3>
               <p>[ A sentence on what you do, how long, or why you like it. ]</p>
             </article>
             <!-- ▲▲▲ END HOBBY 1 ▲▲▲ -->
 
             <!-- ▼▼▼ EDIT HOBBY 2 HERE ▼▼▼ -->
-            <article class="project-panel">
+            <article class="tile">
               <h3>[ Hobby or interest ]</h3>
               <p>[ A sentence on what you do, how long, or why you like it. ]</p>
             </article>
             <!-- ▲▲▲ END HOBBY 2 ▲▲▲ -->
 
             <!-- ▼▼▼ EDIT HOBBY 3 HERE ▼▼▼ -->
-            <article class="project-panel">
+            <article class="tile">
               <h3>[ Hobby or interest ]</h3>
               <p>[ A sentence on what you do, how long, or why you like it. ]</p>
             </article>
             <!-- ▲▲▲ END HOBBY 3 ▲▲▲ -->
 
             <!-- ▼▼▼ EDIT HOBBY 4 HERE ▼▼▼ -->
-            <article class="project-panel">
+            <article class="tile">
               <h3>[ Hobby or interest ]</h3>
               <p>[ A sentence on what you do, how long, or why you like it. ]</p>
             </article>
@@ -140,106 +134,26 @@
           </div>
         </div>
       </section>
-
-      <section class="resume sheet" id="resume">
-        <div class="container resume-grid">
-          <div>
-            <svg class="swirl lavender" viewBox="0 0 100 100" fill="none" aria-hidden="true"><path d="M50,50 m0,-34 a34,34 0 1 1 -24,10 a22,22 0 1 1 16,6 a11,11 0 1 1 -8,3" stroke="currentColor" stroke-width="5"/></svg>
-            <h2>Resume</h2>
-            <p class="blurb">A quick summary of my experience. Download the full PDF for details.</p>
-            <a class="btn btn-primary" href="/assets/resume.pdf" target="_blank" rel="noreferrer">Download résumé</a>
-          </div>
-          <div>
-            <!-- Replace these rows with your real experience / education, or add more rows -->
-            <div class="timeline-row">
-              <span class="dates">[YYYY–YYYY]</span>
-              <div><div class="role">[ Job title ]</div><div class="org">[ Company / organization ]</div></div>
-            </div>
-            <div class="timeline-row">
-              <span class="dates">[YYYY–YYYY]</span>
-              <div><div class="role">[ Job title ]</div><div class="org">[ Company / organization ]</div></div>
-            </div>
-            <div class="timeline-row">
-              <span class="dates">[YYYY–YYYY]</span>
-              <div><div class="role">[ Degree ]</div><div class="org">[ School ]</div></div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section class="contact sheet" id="contact">
-        <div class="container">
-          <svg class="swirl green" viewBox="0 0 100 100" fill="none" aria-hidden="true"><path d="M50,50 m0,-34 a34,34 0 1 1 -24,10 a22,22 0 1 1 16,6 a11,11 0 1 1 -8,3" stroke="currentColor" stroke-width="5"/></svg>
-          <h2>Say hello, or check out what I'm building on GitHub.</h2>
-          <div class="tb-grid">
-            <div class="tb-cell"><span class="k">Name</span><span class="v">Chenhao Sun</span></div>
-            <!-- Replace with your real email -->
-            <div class="tb-cell"><span class="k">Email</span><a href="mailto:[email protected]">[email protected]</a></div>
-            <div class="tb-cell"><span class="k">GitHub</span><a href="https://github.com/bhenbao" target="_blank" rel="noreferrer">github.com/bhenbao</a></div>
-            <!-- Replace with your real location, or delete this cell -->
-            <div class="tb-cell"><span class="k">Based in</span><span class="v">[ City, Country ]</span></div>
-          </div>
-          <p class="contact-foot">© <span id="year"></span> Chenhao Sun</p>
-        </div>
-      </section>
     </main>
 
-    <div class="pager">
-      <button id="prevBtn" class="pager-btn" type="button" aria-label="Previous section">‹</button>
-      <div class="pager-dots">
-        <button class="pager-dot" type="button" data-target="hero" aria-label="Cover"></button>
-        <button class="pager-dot" type="button" data-target="about" aria-label="Profile"></button>
-        <button class="pager-dot" type="button" data-target="work" aria-label="Work"></button>
-        <button class="pager-dot" type="button" data-target="fun" aria-label="Interests"></button>
-        <button class="pager-dot" type="button" data-target="resume" aria-label="Resume"></button>
-        <button class="pager-dot" type="button" data-target="contact" aria-label="Contact"></button>
-      </div>
-      <button id="nextBtn" class="pager-btn" type="button" aria-label="Next section">›</button>
-    </div>
-
     <script>
-      var order = ['hero', 'about', 'work', 'fun', 'resume', 'contact'];
+      var order = ['about', 'work', 'fun'];
       var sheets = document.querySelectorAll('.sheet');
       var navButtons = document.querySelectorAll('[data-target]');
-      var prevBtn = document.getElementById('prevBtn');
-      var nextBtn = document.getElementById('nextBtn');
-      var current = 0;
 
-      function show(index) {
-        index = Math.max(0, Math.min(order.length - 1, index));
-        current = index;
-        var id = order[index];
+      function show(id) {
         sheets.forEach(function (s) { s.classList.toggle('active', s.id === id); });
         if (document.getElementById(id)) document.getElementById(id).scrollTop = 0;
         navButtons.forEach(function (b) { b.setAttribute('aria-current', b.dataset.target === id ? 'true' : 'false'); });
-        prevBtn.disabled = index === 0;
-        nextBtn.disabled = index === order.length - 1;
         history.replaceState(null, '', '#' + id);
       }
 
       navButtons.forEach(function (b) {
-        b.addEventListener('click', function () { show(order.indexOf(b.dataset.target)); });
-      });
-      prevBtn.addEventListener('click', function () { show(current - 1); });
-      nextBtn.addEventListener('click', function () { show(current + 1); });
-      document.addEventListener('keydown', function (e) {
-        if (e.key === 'ArrowRight') show(current + 1);
-        if (e.key === 'ArrowLeft') show(current - 1);
+        b.addEventListener('click', function () { show(b.dataset.target); });
       });
 
-      var touchX = null;
-      var main = document.getElementById('top');
-      main.addEventListener('touchstart', function (e) { touchX = e.touches[0].clientX; });
-      main.addEventListener('touchend', function (e) {
-        if (touchX === null) return;
-        var dx = e.changedTouches[0].clientX - touchX;
-        if (Math.abs(dx) > 60) show(current + (dx < 0 ? 1 : -1));
-        touchX = null;
-      });
-
-      var startId = order.indexOf(location.hash.slice(1)) !== -1 ? location.hash.slice(1) : 'hero';
-      show(order.indexOf(startId));
-      document.getElementById('year').textContent = new Date().getFullYear();
+      var startId = order.indexOf(location.hash.slice(1)) !== -1 ? location.hash.slice(1) : 'about';
+      show(startId);
     </script>
   </body>
 </html>
