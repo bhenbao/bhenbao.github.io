@@ -1,2 +1,6 @@
-theme: jekyll-theme-minimal
-title: Chenhao Sun - Portfolio
+title: Chenhao Sun — Portfolio
+description: Personal portfolio and selected work by Chenhao Sun.
+url: "https://bhenbao.github.io"
+baseurl: ""
+lang: en
+markdown: kramdown
