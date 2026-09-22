@@ -1,3 +1,5 @@
+---
+---
 <!doctype html>
 <html lang="en">
   <head>
@@ -13,12 +15,13 @@
   <body>
     <header class="titleblock">
       <nav class="container" aria-label="Main navigation">
-        <a class="brand" href="#top">CS.</a>
+        <button class="brand" type="button" data-target="hero">CS.</button>
         <ul class="sheet-index">
-          <li><a href="#about">A-01 Profile</a></li>
-          <li><a href="#work">A-02 Work</a></li>
-          <li><a href="#resume">A-03 Resume</a></li>
-          <li><a href="#contact">A-04 Contact</a></li>
+          <li><button type="button" data-target="about">A-01 Profile</button></li>
+          <li><button type="button" data-target="work">A-02 Work</button></li>
+          <li><button type="button" data-target="fun">A-03 Interests</button></li>
+          <li><button type="button" data-target="resume">A-04 Resume</button></li>
+          <li><button type="button" data-target="contact">A-05 Contact</button></li>
         </ul>
         <!-- Add your real résumé PDF at assets/resume.pdf — this link points there -->
         <a class="resume-link" href="/assets/resume.pdf" target="_blank" rel="noreferrer">Résumé ↓</a>
@@ -101,10 +104,54 @@
         </div>
       </section>
 
+      <section class="work sheet" id="fun">
+        <div class="container">
+          <p class="label sheet-tag">Sheet A-03 / Interests</p>
+          <h2>Off the clock</h2>
+          <!-- Replace with a line about what you do outside of code -->
+          <p class="fun-intro">[ One line about what you're into outside of work — this is the section that makes you a real person to whoever's reading. ]</p>
+          <div class="fun-grid">
+
+            <!-- ▼▼▼ EDIT HOBBY 1 HERE ▼▼▼ -->
+            <article class="project-panel">
+              <span class="rev">Int. 01</span>
+              <h3>[ Hobby or interest ]</h3>
+              <p>[ A sentence on what you do, how long, or why you like it. ]</p>
+            </article>
+            <!-- ▲▲▲ END HOBBY 1 ▲▲▲ -->
+
+            <!-- ▼▼▼ EDIT HOBBY 2 HERE ▼▼▼ -->
+            <article class="project-panel">
+              <span class="rev">Int. 02</span>
+              <h3>[ Hobby or interest ]</h3>
+              <p>[ A sentence on what you do, how long, or why you like it. ]</p>
+            </article>
+            <!-- ▲▲▲ END HOBBY 2 ▲▲▲ -->
+
+            <!-- ▼▼▼ EDIT HOBBY 3 HERE ▼▼▼ -->
+            <article class="project-panel">
+              <span class="rev">Int. 03</span>
+              <h3>[ Hobby or interest ]</h3>
+              <p>[ A sentence on what you do, how long, or why you like it. ]</p>
+            </article>
+            <!-- ▲▲▲ END HOBBY 3 ▲▲▲ -->
+
+            <!-- ▼▼▼ EDIT HOBBY 4 HERE ▼▼▼ -->
+            <article class="project-panel">
+              <span class="rev">Int. 04</span>
+              <h3>[ Hobby or interest ]</h3>
+              <p>[ A sentence on what you do, how long, or why you like it. ]</p>
+            </article>
+            <!-- ▲▲▲ END HOBBY 4 ▲▲▲ -->
+
+          </div>
+        </div>
+      </section>
+
       <section class="resume sheet" id="resume">
         <div class="container resume-grid">
           <div>
-            <p class="label sheet-tag">Sheet A-03 / Resume</p>
+            <p class="label sheet-tag">Sheet A-04 / Resume</p>
             <h2>Resume</h2>
             <p class="blurb">A quick summary of my experience. Download the full PDF for details.</p>
             <a class="btn btn-stamp" href="/assets/resume.pdf" target="_blank" rel="noreferrer">Download résumé</a>
@@ -129,7 +176,7 @@
 
       <section class="contact sheet" id="contact">
         <div class="container">
-          <p class="label sheet-tag">Sheet A-04 / Contact</p>
+          <p class="label sheet-tag">Sheet A-05 / Contact</p>
           <h2>Say hello, or check out what I'm building on GitHub.</h2>
           <div class="tb-table">
             <div class="tb-cell"><span class="k">Name</span><span class="v">Chenhao Sun</span></div>
@@ -139,16 +186,63 @@
             <!-- Replace with your real location, or delete this cell -->
             <div class="tb-cell"><span class="k">Based in</span><span class="v">[ City, Country ]</span></div>
           </div>
+          <p class="contact-foot mono">© <span id="year"></span> Chenhao Sun · Sheet 6 of 6</p>
         </div>
       </section>
     </main>
 
-    <footer class="footer">
-      <div class="container">
-        <span>End of set · 5 sheets</span>
-        <span>© <span id="year"></span> Chenhao Sun</span>
-      </div>
-    </footer>
-    <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+    <div class="pager">
+      <button id="prevBtn" class="pager-btn" type="button">‹ Prev</button>
+      <span id="pagerLabel" class="pager-label"></span>
+      <button id="nextBtn" class="pager-btn" type="button">Next ›</button>
+    </div>
+
+    <script>
+      var order = ['hero', 'about', 'work', 'fun', 'resume', 'contact'];
+      var titles = { hero: 'A-00 · Cover', about: 'A-01 · Profile', work: 'A-02 · Work', fun: 'A-03 · Interests', resume: 'A-04 · Resume', contact: 'A-05 · Contact' };
+      var sheets = document.querySelectorAll('.sheet');
+      var navButtons = document.querySelectorAll('[data-target]');
+      var pagerLabel = document.getElementById('pagerLabel');
+      var prevBtn = document.getElementById('prevBtn');
+      var nextBtn = document.getElementById('nextBtn');
+      var current = 0;
+
+      function show(index) {
+        index = Math.max(0, Math.min(order.length - 1, index));
+        current = index;
+        var id = order[index];
+        sheets.forEach(function (s) { s.classList.toggle('active', s.id === id); });
+        if (document.getElementById(id)) document.getElementById(id).scrollTop = 0;
+        navButtons.forEach(function (b) { b.setAttribute('aria-current', b.dataset.target === id ? 'true' : 'false'); });
+        pagerLabel.textContent = titles[id] + ' / ' + (index + 1) + ' of ' + order.length;
+        prevBtn.disabled = index === 0;
+        nextBtn.disabled = index === order.length - 1;
+        history.replaceState(null, '', '#' + id);
+      }
+
+      navButtons.forEach(function (b) {
+        b.addEventListener('click', function () { show(order.indexOf(b.dataset.target)); });
+      });
+      prevBtn.addEventListener('click', function () { show(current - 1); });
+      nextBtn.addEventListener('click', function () { show(current + 1); });
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'ArrowRight') show(current + 1);
+        if (e.key === 'ArrowLeft') show(current - 1);
+      });
+
+      var touchX = null;
+      var main = document.getElementById('top');
+      main.addEventListener('touchstart', function (e) { touchX = e.touches[0].clientX; });
+      main.addEventListener('touchend', function (e) {
+        if (touchX === null) return;
+        var dx = e.changedTouches[0].clientX - touchX;
+        if (Math.abs(dx) > 60) show(current + (dx < 0 ? 1 : -1));
+        touchX = null;
+      });
+
+      var startId = order.indexOf(location.hash.slice(1)) !== -1 ? location.hash.slice(1) : 'hero';
+      show(order.indexOf(startId));
+      document.getElementById('year').textContent = new Date().getFullYear();
+    </script>
   </body>
 </html>
