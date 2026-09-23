@@ -5,195 +5,42 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Chenhao Sun's personal portfolio — about, projects, and interests." />
-    <title>Chenhao Sun — Portfolio</title>
+    <title>[ Project name ] — Chenhao Sun</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,600;0,700;0,900;1,500&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="/assets/css/style.css" />
+    <style>
+      /* This page isn't paginated like the main site — it just scrolls normally */
+      body { overflow: auto; height: auto; min-height: 100vh; display: block; }
+      .proj-wrap { background-color: var(--brown); background-image: var(--doodles), var(--grid); background-repeat: repeat, repeat; min-height: 100vh; padding: 70px 0 100px; }
+      .proj-container { width: min(760px, calc(100% - 56px)); margin: 0 auto; }
+      .back-link { display: inline-flex; align-items: center; gap: 8px; color: var(--muted); text-decoration: none; font-weight: 700; font-size: .9rem; margin-bottom: 2.4rem; }
+      .back-link:hover { color: var(--pink); }
+      .proj-container h1 { font-size: clamp(2.2rem, 5.5vw, 3.4rem); margin-bottom: .6rem; }
+      .proj-meta { color: var(--pink); font-family: 'Fraunces', serif; font-style: italic; font-weight: 500; font-size: 1.15rem; margin-bottom: 2rem; display: block; }
+      .proj-hero-img { width: 100%; max-height: 460px; object-fit: cover; border-radius: 32px 12px 32px 12px; border: 1.5px solid var(--line); margin-bottom: 2.4rem; }
+      .proj-container p { color: var(--muted); font-size: 1.05rem; max-width: 640px; margin: 0 0 1.4rem; }
+      .proj-links { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 2rem; }
+    </style>
   </head>
   <body>
-    <header class="titleblock">
-      <nav class="container" aria-label="Main navigation">
-        <button class="brand" type="button" data-target="about">Chenhao Sun</button>
-        <ul class="sheet-index">
-          <li><button type="button" data-target="about">About</button></li>
-          <li><button type="button" data-target="work">Projects</button></li>
-          <li><button type="button" data-target="fun">Fun</button></li>
-        </ul>
-      </nav>
-    </header>
+    <div class="proj-wrap">
+      <div class="proj-container">
+        <a class="back-link" href="/#work">‹ Back to projects</a>
 
-    <main id="top">
-      <section class="sheet" id="about">
-        <div class="container">
-          <div class="about-hero">
-            <div class="about-intro">
-              <h1>Chenhao Sun</h1>
-              <span class="role">UBC Engineering Physics</span>
-              <!-- Replace with your real bio — combine who you are, what you're working on, and what you build -->
-              <p class="summary">[ Write two or three sentences that bring together who you are, what you're studying or working on at UBC Engineering Physics, the kind of problems you like to solve, and what you're currently building. ]</p>
-            </div>
+        <!-- Replace with the real project title -->
+        <h1>[ Project name ]</h1>
+        <!-- Replace with a short tag — timeframe, role, or category -->
+        <span class="proj-meta">[ e.g. Personal project · 2026 ]</span>
 
-            <div class="photo-carousel-wrap">
-              <button class="carousel-btn carousel-prev" type="button" aria-label="Previous photo">‹</button>
-              <div class="photo-carousel" id="photoCarousel">
-                <!-- Headshot first, then the rest — swap these src paths for your own photos in assets/images/ -->
-                <img src="/assets/images/about-1.jpg" alt="Chenhao Sun headshot" loading="lazy" />
-                <img src="/assets/images/about-2.jpg" alt="Chenhao Sun" loading="lazy" />
-                <img src="/assets/images/about-3.jpg" alt="Chenhao Sun" loading="lazy" />
-                <img src="/assets/images/about-4.jpg" alt="Chenhao Sun" loading="lazy" />
-              </div>
-              <button class="carousel-btn carousel-next" type="button" aria-label="Next photo">›</button>
-            </div>
-          </div>
+        <!-- Swap this image for the project's real hero photo in assets/images/ -->
+        <img class="proj-hero-img" src="/assets/images/project-phone-stand.jpg" alt="[ Project name ] photo" />
 
-          <div class="photo-dots" id="photoDots">
-            <button class="photo-dot" type="button" data-index="0" aria-label="Photo 1"></button>
-            <button class="photo-dot" type="button" data-index="1" aria-label="Photo 2"></button>
-            <button class="photo-dot" type="button" data-index="2" aria-label="Photo 3"></button>
-            <button class="photo-dot" type="button" data-index="3" aria-label="Photo 4"></button>
-          </div>
-
-          <div class="actions bottom-actions">
-            <!-- Add your real résumé PDF at assets/resume.pdf — this button links there -->
-            <a class="btn btn-primary" href="/assets/resume.pdf" target="_blank" rel="noreferrer">Resume</a>
-            <a class="btn btn-outline" href="mailto:chenhao.sun11@gmail.com">Contact</a>
-          </div>
-        </div>
-      </section>
-
-      <section class="sheet" id="work">
-        <div class="container">
-          <div class="section-head">
-            <h2>Projects</h2>
-            <p>A few things I've built. Swap these placeholders for your real projects.</p>
-          </div>
-          <div class="tile-grid">
-
-            <!-- ▼▼▼ EDIT PROJECT 1 HERE ▼▼▼ -->
-            <article class="tile">
-              <h3>Mars Robot</h3>
-              <!-- Replace with a real description whenever you're ready -->
-              <p>[ A small rover built to navigate simulated Martian terrain — swap in your real project description here. ]</p>
-              <a href="/project.html">View project ↗</a>
-            </article>
-            <!-- ▲▲▲ END PROJECT 1 ▲▲▲ -->
-
-            <!-- ▼▼▼ EDIT PROJECT 2 HERE ▼▼▼ -->
-            <article class="tile">
-              <img class="tile-img" src="/assets/images/project-antenna.jpg" alt="Assembling the antenna deployer module" loading="lazy" />
-              <h3>Antenna Deployer Module</h3>
-              <!-- Replace with a real description whenever you're ready -->
-              <p>[ A spring-loaded deployment mechanism for a satellite antenna, assembled and tested by hand — swap in your real project description here. ]</p>
-              <a href="/project.html">View project ↗</a>
-            </article>
-            <!-- ▲▲▲ END PROJECT 2 ▲▲▲ -->
-
-            <!-- ▼▼▼ EDIT PROJECT 3 HERE ▼▼▼ -->
-            <article class="tile">
-              <img class="tile-img" src="/assets/images/project-phone-stand.jpg" alt="CAD render of a metal adjustable phone stand" loading="lazy" />
-              <h3>Metal Adjustable Phone Stand</h3>
-              <!-- Replace with a real description whenever you're ready -->
-              <p>[ A folding, angle-adjustable stand machined from aluminum, designed and modeled in SolidWorks — swap in your real project description here. ]</p>
-              <a href="/project.html">View project ↗</a>
-            </article>
-            <!-- ▲▲▲ END PROJECT 3 ▲▲▲ -->
-
-          </div>
-        </div>
-      </section>
-
-      <section class="sheet" id="fun">
-        <div class="container">
-          <div class="section-head">
-            <h2>Off the clock</h2>
-          </div>
-          <!-- Replace with a line about what you do outside of code -->
-          <p class="fun-intro">[ One line about what you're into outside of work — this is the section that makes you a real person to whoever's reading. ]</p>
-          <div class="tile-grid two-col">
-
-            <!-- ▼▼▼ EDIT HOBBY 1 HERE ▼▼▼ -->
-            <article class="tile">
-              <h3>[ Hobby or interest ]</h3>
-              <p>[ A sentence on what you do, how long, or why you like it. ]</p>
-            </article>
-            <!-- ▲▲▲ END HOBBY 1 ▲▲▲ -->
-
-            <!-- ▼▼▼ EDIT HOBBY 2 HERE ▼▼▼ -->
-            <article class="tile">
-              <h3>[ Hobby or interest ]</h3>
-              <p>[ A sentence on what you do, how long, or why you like it. ]</p>
-            </article>
-            <!-- ▲▲▲ END HOBBY 2 ▲▲▲ -->
-
-            <!-- ▼▼▼ EDIT HOBBY 3 HERE ▼▼▼ -->
-            <article class="tile">
-              <h3>[ Hobby or interest ]</h3>
-              <p>[ A sentence on what you do, how long, or why you like it. ]</p>
-            </article>
-            <!-- ▲▲▲ END HOBBY 3 ▲▲▲ -->
-
-            <!-- ▼▼▼ EDIT HOBBY 4 HERE ▼▼▼ -->
-            <article class="tile">
-              <h3>[ Hobby or interest ]</h3>
-              <p>[ A sentence on what you do, how long, or why you like it. ]</p>
-            </article>
-            <!-- ▲▲▲ END HOBBY 4 ▲▲▲ -->
-
-          </div>
-        </div>
-      </section>
-    </main>
-
-    <script>
-      var order = ['about', 'work', 'fun'];
-      var sheets = document.querySelectorAll('.sheet');
-      var navButtons = document.querySelectorAll('[data-target]');
-
-      function show(id) {
-        sheets.forEach(function (s) { s.classList.toggle('active', s.id === id); });
-        if (document.getElementById(id)) document.getElementById(id).scrollTop = 0;
-        navButtons.forEach(function (b) { b.setAttribute('aria-current', b.dataset.target === id ? 'true' : 'false'); });
-        history.replaceState(null, '', '#' + id);
-      }
-
-      navButtons.forEach(function (b) {
-        b.addEventListener('click', function () { show(b.dataset.target); });
-      });
-
-      var startId = order.indexOf(location.hash.slice(1)) !== -1 ? location.hash.slice(1) : 'about';
-      show(startId);
-
-      var carousel = document.getElementById('photoCarousel');
-      var prevPhoto = document.querySelector('.carousel-prev');
-      var nextPhoto = document.querySelector('.carousel-next');
-      var dots = document.querySelectorAll('.photo-dot');
-      if (carousel && prevPhoto && nextPhoto) {
-        var scrollByOne = function (dir) {
-          var width = carousel.getBoundingClientRect().width;
-          carousel.scrollBy({ left: dir * width, behavior: 'smooth' });
-        };
-        prevPhoto.addEventListener('click', function () { scrollByOne(-1); });
-        nextPhoto.addEventListener('click', function () { scrollByOne(1); });
-        dots.forEach(function (dot) {
-          dot.addEventListener('click', function () {
-            var i = Number(dot.dataset.index);
-            carousel.scrollTo({ left: i * carousel.getBoundingClientRect().width, behavior: 'smooth' });
-          });
-        });
-        var imgs = carousel.querySelectorAll('img');
-        var observer = new IntersectionObserver(function (entries) {
-          entries.forEach(function (entry) {
-            if (entry.isIntersecting) {
-              var i = Array.prototype.indexOf.call(imgs, entry.target);
-              dots.forEach(function (d, di) { d.classList.toggle('active', di === i); });
-            }
-          });
-        }, { root: carousel, threshold: 0.6 });
-        imgs.forEach(function (img) { observer.observe(img); });
-        if (dots[0]) dots[0].classList.add('active');
-      }
-    </script>
+        <!-- Replace with the real write-up: what it is, why you built it, how it works -->
+        <p>[ Write a longer description here — what the project is, the problem it solves, and how you approached it. ]</p>
+        <p>[ Add a second paragraph on the build process, tools used, or what you learned, if useful. ]</p>
+      </div>
+    </div>
   </body>
 </html>
