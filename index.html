@@ -47,13 +47,6 @@
             </div>
           </div>
 
-          <div class="photo-dots" id="photoDots">
-            <button class="photo-dot" type="button" data-index="0" aria-label="Photo 1"></button>
-            <button class="photo-dot" type="button" data-index="1" aria-label="Photo 2"></button>
-            <button class="photo-dot" type="button" data-index="2" aria-label="Photo 3"></button>
-            <button class="photo-dot" type="button" data-index="3" aria-label="Photo 4"></button>
-          </div>
-
           <div class="actions bottom-actions">
             <button class="btn btn-primary" type="button" data-target="work">View Projects</button>
             <!-- Add your real résumé PDF at assets/resume.pdf — this button links there -->
@@ -179,42 +172,19 @@
       var startId = order.indexOf(location.hash.slice(1)) !== -1 ? location.hash.slice(1) : 'about';
       show(startId);
 
+      // Photo carousel — crossfades automatically, no arrows or dots
       var carousel = document.getElementById('photoCarousel');
-      var dots = document.querySelectorAll('.photo-dot');
       if (carousel) {
-        var imgs = carousel.querySelectorAll('img');
+        var imgs = Array.prototype.slice.call(carousel.querySelectorAll('img'));
         var current = 0;
-        var goTo = function (i) {
-          current = (i + imgs.length) % imgs.length;
-          carousel.scrollTo({ left: current * carousel.getBoundingClientRect().width, behavior: 'smooth' });
-        };
-        dots.forEach(function (dot) {
-          dot.addEventListener('click', function () {
-            goTo(Number(dot.dataset.index));
-            resetAutoplay();
-          });
-        });
-        var observer = new IntersectionObserver(function (entries) {
-          entries.forEach(function (entry) {
-            if (entry.isIntersecting) {
-              var i = Array.prototype.indexOf.call(imgs, entry.target);
-              current = i;
-              dots.forEach(function (d, di) { d.classList.toggle('active', di === i); });
-            }
-          });
-        }, { root: carousel, threshold: 0.6 });
-        imgs.forEach(function (img) { observer.observe(img); });
-        if (dots[0]) dots[0].classList.add('active');
-
-        var autoplayTimer;
-        var startAutoplay = function () {
-          autoplayTimer = setInterval(function () { goTo(current + 1); }, 4000);
-        };
-        var resetAutoplay = function () {
-          clearInterval(autoplayTimer);
-          startAutoplay();
-        };
-        if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) startAutoplay();
+        if (imgs[0]) imgs[0].classList.add('active');
+        if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches && imgs.length > 1) {
+          setInterval(function () {
+            imgs[current].classList.remove('active');
+            current = (current + 1) % imgs.length;
+            imgs[current].classList.add('active');
+          }, 4000);
+        }
       }
     </script>
   </body>
