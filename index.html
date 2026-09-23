@@ -29,30 +29,35 @@
         <div class="container">
           <div class="about-intro">
             <h1>Chenhao Sun</h1>
-            <!-- Replace with your role / tagline -->
-            <span class="role">[ Your role or tagline, e.g. software builder ]</span>
-            <!-- Replace with your one-line summary -->
-            <p class="summary">[ One or two sentences on what you build and what you're currently focused on. ]</p>
-            <div class="actions">
-              <!-- Add your real résumé PDF at assets/resume.pdf — this button links there -->
-              <a class="btn btn-primary" href="/assets/resume.pdf" target="_blank" rel="noreferrer">Resume</a>
-              <!-- Replace with your real email -->
-              <a class="btn btn-outline" href="mailto:[email protected]">Contact</a>
-            </div>
+            <span class="role">UBC Engineering Physics</span>
+            <!-- Replace with your real bio — combine who you are, what you're working on, and what you build -->
+            <p class="summary">[ Write two or three sentences that bring together who you are, what you're studying or working on at UBC Engineering Physics, the kind of problems you like to solve, and what you're currently building. ]</p>
           </div>
-          <div class="about-grid">
-            <div>
-              <h2>About</h2>
-              <!-- Replace with your real bio -->
-              <p>[ Write two or three sentences about who you are, what you're studying or working on, and what kind of problems you like to solve. ]</p>
+
+          <div class="photo-carousel-wrap">
+            <button class="carousel-btn carousel-prev" type="button" aria-label="Previous photo">‹</button>
+            <div class="photo-carousel" id="photoCarousel">
+              <!-- Headshot first, then the rest — swap these src paths for your own photos in assets/images/ -->
+              <img src="/assets/images/about-1.jpg" alt="Chenhao Sun headshot" loading="lazy" />
+              <img src="/assets/images/about-2.jpg" alt="Chenhao Sun" loading="lazy" />
+              <img src="/assets/images/about-3.jpg" alt="Chenhao Sun" loading="lazy" />
+              <img src="/assets/images/about-4.jpg" alt="Chenhao Sun" loading="lazy" />
             </div>
-            <div class="specs">
-              <!-- Replace these rows with your real skills / interests, or add more rows -->
-              <div class="spec-row"><span class="k">Languages</span><span class="v">[ e.g. Python, TypeScript, Go ]</span></div>
-              <div class="spec-row"><span class="k">Focus</span><span class="v">[ e.g. backend systems, ML ]</span></div>
-              <div class="spec-row"><span class="k">Tools</span><span class="v">[ e.g. React, Docker, AWS ]</span></div>
-              <div class="spec-row"><span class="k">Based in</span><span class="v">[ City, Country ]</span></div>
-            </div>
+            <button class="carousel-btn carousel-next" type="button" aria-label="Next photo">›</button>
+          </div>
+
+          <div class="specs">
+            <!-- Replace these rows with your real skills / interests, or add more rows -->
+            <div class="spec-row"><span class="k">Languages</span><span class="v">[ e.g. Python, TypeScript, Go ]</span></div>
+            <div class="spec-row"><span class="k">Focus</span><span class="v">[ e.g. backend systems, ML ]</span></div>
+            <div class="spec-row"><span class="k">Tools</span><span class="v">[ e.g. React, Docker, AWS ]</span></div>
+            <div class="spec-row"><span class="k">Based in</span><span class="v">[ City, Country ]</span></div>
+          </div>
+
+          <div class="actions bottom-actions">
+            <!-- Add your real résumé PDF at assets/resume.pdf — this button links there -->
+            <a class="btn btn-primary" href="/assets/resume.pdf" target="_blank" rel="noreferrer">Resume</a>
+            <a class="btn btn-outline" href="mailto:chenhao.sun11@gmail.com">Contact</a>
           </div>
         </div>
       </section>
@@ -153,6 +158,19 @@
 
       var startId = order.indexOf(location.hash.slice(1)) !== -1 ? location.hash.slice(1) : 'about';
       show(startId);
+
+      var carousel = document.getElementById('photoCarousel');
+      var prevPhoto = document.querySelector('.carousel-prev');
+      var nextPhoto = document.querySelector('.carousel-next');
+      if (carousel && prevPhoto && nextPhoto) {
+        var scrollByOne = function (dir) {
+          var img = carousel.querySelector('img');
+          var step = img ? img.getBoundingClientRect().width + 16 : 280;
+          carousel.scrollBy({ left: dir * step, behavior: 'smooth' });
+        };
+        prevPhoto.addEventListener('click', function () { scrollByOne(-1); });
+        nextPhoto.addEventListener('click', function () { scrollByOne(1); });
+      }
     </script>
   </body>
 </html>
