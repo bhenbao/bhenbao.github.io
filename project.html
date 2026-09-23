@@ -1,0 +1,51 @@
+---
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>[ Project name ] — Chenhao Sun</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,600;0,700;0,900;1,500&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="/assets/css/style.css" />
+    <style>
+      /* This page isn't paginated like the main site — it just scrolls normally */
+      body { overflow: auto; height: auto; min-height: 100vh; display: block; }
+      .proj-wrap { background-color: var(--brown); background-image: var(--doodles), var(--grid); background-repeat: repeat, repeat; min-height: 100vh; padding: 70px 0 100px; }
+      .proj-container { width: min(760px, calc(100% - 56px)); margin: 0 auto; }
+      .back-link { display: inline-flex; align-items: center; gap: 8px; color: var(--muted); text-decoration: none; font-weight: 700; font-size: .9rem; margin-bottom: 2.4rem; }
+      .back-link:hover { color: var(--pink); }
+      .proj-container h1 { font-size: clamp(2.2rem, 5.5vw, 3.4rem); margin-bottom: .6rem; }
+      .proj-meta { color: var(--pink); font-family: 'Fraunces', serif; font-style: italic; font-weight: 500; font-size: 1.15rem; margin-bottom: 2rem; display: block; }
+      .proj-hero-img { width: 100%; max-height: 460px; object-fit: cover; border-radius: 32px 12px 32px 12px; border: 1.5px solid var(--line); margin-bottom: 2.4rem; }
+      .proj-container p { color: var(--muted); font-size: 1.05rem; max-width: 640px; margin: 0 0 1.4rem; }
+      .proj-links { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 2rem; }
+    </style>
+  </head>
+  <body>
+    <div class="proj-wrap">
+      <div class="proj-container">
+        <a class="back-link" href="/#work">‹ Back to projects</a>
+
+        <!-- Replace with the real project title -->
+        <h1>[ Project name ]</h1>
+        <!-- Replace with a short tag — timeframe, role, or category -->
+        <span class="proj-meta">[ e.g. Personal project · 2026 ]</span>
+
+        <!-- Swap this image for the project's real hero photo in assets/images/ -->
+        <img class="proj-hero-img" src="/assets/images/project-phone-stand.jpg" alt="[ Project name ] photo" />
+
+        <!-- Replace with the real write-up: what it is, why you built it, how it works -->
+        <p>[ Write a longer description here — what the project is, the problem it solves, and how you approached it. ]</p>
+        <p>[ Add a second paragraph on the build process, tools used, or what you learned, if useful. ]</p>
+
+        <div class="proj-links">
+          <!-- Replace with a real link (GitHub repo, demo, writeup, etc.) or remove -->
+          <a class="btn btn-outline" href="#" target="_blank" rel="noreferrer">Source ↗</a>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
