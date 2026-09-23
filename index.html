@@ -15,7 +15,7 @@
   <body>
     <header class="titleblock">
       <nav class="container" aria-label="Main navigation">
-        <button class="brand" type="button" data-target="about">Chenhao</button>
+        <button class="brand" type="button" data-target="about">Chenhao Sun</button>
         <ul class="sheet-index">
           <li><button type="button" data-target="about">About</button></li>
           <li><button type="button" data-target="work">Projects</button></li>
@@ -27,23 +27,32 @@
     <main id="top">
       <section class="sheet" id="about">
         <div class="container">
-          <div class="about-intro">
-            <h1>Chenhao Sun</h1>
-            <span class="role">UBC Engineering Physics</span>
-            <!-- Replace with your real bio — combine who you are, what you're working on, and what you build -->
-            <p class="summary">[ Write two or three sentences that bring together who you are, what you're studying or working on at UBC Engineering Physics, the kind of problems you like to solve, and what you're currently building. ]</p>
+          <div class="about-hero">
+            <div class="about-intro">
+              <h1>Chenhao Sun</h1>
+              <span class="role">UBC Engineering Physics</span>
+              <!-- Replace with your real bio — combine who you are, what you're working on, and what you build -->
+              <p class="summary">[ Write two or three sentences that bring together who you are, what you're studying or working on at UBC Engineering Physics, the kind of problems you like to solve, and what you're currently building. ]</p>
+            </div>
+
+            <div class="photo-carousel-wrap">
+              <button class="carousel-btn carousel-prev" type="button" aria-label="Previous photo">‹</button>
+              <div class="photo-carousel" id="photoCarousel">
+                <!-- Headshot first, then the rest — swap these src paths for your own photos in assets/images/ -->
+                <img src="/assets/images/about-1.jpg" alt="Chenhao Sun headshot" loading="lazy" />
+                <img src="/assets/images/about-2.jpg" alt="Chenhao Sun" loading="lazy" />
+                <img src="/assets/images/about-3.jpg" alt="Chenhao Sun" loading="lazy" />
+                <img src="/assets/images/about-4.jpg" alt="Chenhao Sun" loading="lazy" />
+              </div>
+              <button class="carousel-btn carousel-next" type="button" aria-label="Next photo">›</button>
+            </div>
           </div>
 
-          <div class="photo-carousel-wrap">
-            <button class="carousel-btn carousel-prev" type="button" aria-label="Previous photo">‹</button>
-            <div class="photo-carousel" id="photoCarousel">
-              <!-- Headshot first, then the rest — swap these src paths for your own photos in assets/images/ -->
-              <img src="/assets/images/about-1.jpg" alt="Chenhao Sun headshot" loading="lazy" />
-              <img src="/assets/images/about-2.jpg" alt="Chenhao Sun" loading="lazy" />
-              <img src="/assets/images/about-3.jpg" alt="Chenhao Sun" loading="lazy" />
-              <img src="/assets/images/about-4.jpg" alt="Chenhao Sun" loading="lazy" />
-            </div>
-            <button class="carousel-btn carousel-next" type="button" aria-label="Next photo">›</button>
+          <div class="photo-dots" id="photoDots">
+            <button class="photo-dot" type="button" data-index="0" aria-label="Photo 1"></button>
+            <button class="photo-dot" type="button" data-index="1" aria-label="Photo 2"></button>
+            <button class="photo-dot" type="button" data-index="2" aria-label="Photo 3"></button>
+            <button class="photo-dot" type="button" data-index="3" aria-label="Photo 4"></button>
           </div>
 
           <div class="specs">
@@ -72,8 +81,10 @@
 
             <!-- ▼▼▼ EDIT PROJECT 1 HERE ▼▼▼ -->
             <article class="tile">
-              <h3>[ Project name ]</h3>
-              <p>[ One or two sentences on what it does and why you built it. ]</p>
+              <img class="tile-img" src="/assets/images/project-phone-stand.jpg" alt="CAD render of a metal adjustable phone stand" loading="lazy" />
+              <h3>Metal Adjustable Phone Stand</h3>
+              <!-- Replace with a real description whenever you're ready -->
+              <p>[ A folding, angle-adjustable stand machined from aluminum, designed and modeled in SolidWorks — swap in your real project description here. ]</p>
               <a href="#" target="_blank" rel="noreferrer">View project ↗</a>
             </article>
             <!-- ▲▲▲ END PROJECT 1 ▲▲▲ -->
@@ -162,14 +173,31 @@
       var carousel = document.getElementById('photoCarousel');
       var prevPhoto = document.querySelector('.carousel-prev');
       var nextPhoto = document.querySelector('.carousel-next');
+      var dots = document.querySelectorAll('.photo-dot');
       if (carousel && prevPhoto && nextPhoto) {
         var scrollByOne = function (dir) {
-          var img = carousel.querySelector('img');
-          var step = img ? img.getBoundingClientRect().width + 16 : 280;
-          carousel.scrollBy({ left: dir * step, behavior: 'smooth' });
+          var width = carousel.getBoundingClientRect().width;
+          carousel.scrollBy({ left: dir * width, behavior: 'smooth' });
         };
         prevPhoto.addEventListener('click', function () { scrollByOne(-1); });
         nextPhoto.addEventListener('click', function () { scrollByOne(1); });
+        dots.forEach(function (dot) {
+          dot.addEventListener('click', function () {
+            var i = Number(dot.dataset.index);
+            carousel.scrollTo({ left: i * carousel.getBoundingClientRect().width, behavior: 'smooth' });
+          });
+        });
+        var imgs = carousel.querySelectorAll('img');
+        var observer = new IntersectionObserver(function (entries) {
+          entries.forEach(function (entry) {
+            if (entry.isIntersecting) {
+              var i = Array.prototype.indexOf.call(imgs, entry.target);
+              dots.forEach(function (d, di) { d.classList.toggle('active', di === i); });
+            }
+          });
+        }, { root: carousel, threshold: 0.6 });
+        imgs.forEach(function (img) { observer.observe(img); });
+        if (dots[0]) dots[0].classList.add('active');
       }
     </script>
   </body>
