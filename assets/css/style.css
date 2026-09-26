@@ -12,14 +12,8 @@
 }
 
 *, *::before, *::after { box-sizing: border-box; }
-html, body { height: 100%; }
 body {
   margin: 0;
-  display: flex;
-  flex-direction: column;
-  height: 100vh;
-  height: 100dvh;
-  overflow: hidden;
   background: var(--brown);
   color: var(--white);
   font-family: 'Nunito', sans-serif;
@@ -38,7 +32,7 @@ a { -webkit-tap-highlight-color: transparent; }
 h1, h2 { font-family: 'Fraunces', serif; font-weight: 700; margin: 0; line-height: 1.04; color: var(--white); }
 
 /* Nav */
-.titleblock { flex: 0 0 auto; background-color: var(--brown-dark); background-image: var(--doodles), var(--grid); background-repeat: repeat, repeat; background-size: 360px 360px, 42px 42px; border-bottom: 1px solid var(--line); }
+.titleblock { position: sticky; top: 0; z-index: 20; background-color: var(--brown-dark); background-image: var(--doodles), var(--grid); background-repeat: repeat, repeat; background-size: 360px 360px, 42px 42px; border-bottom: 1px solid var(--line); }
 .titleblock .container { display: flex; align-items: center; justify-content: space-between; height: 60px; gap: 20px; }
 .titleblock button { background: none; border: none; padding: 0; cursor: pointer; color: var(--white); }
 .brand { font-family: 'Fraunces', serif; font-weight: 700; font-style: italic; font-size: 1.3rem; }
@@ -48,22 +42,15 @@ h1, h2 { font-family: 'Fraunces', serif; font-weight: 700; margin: 0; line-heigh
 .sheet-index button[aria-current="true"] { color: var(--brown-dark); background: var(--pink); }
 
 /* Sections */
-main#top { flex: 1 1 auto; position: relative; overflow: hidden; }
+main#top { display: block; }
 .sheet {
-  position: absolute;
-  inset: 0;
-  overflow-y: auto;
   padding: 64px 0 80px;
   background-color: var(--brown);
   background-image: var(--doodles), var(--grid);
   background-repeat: repeat, repeat;
   background-size: 360px 360px, 42px 42px;
-  opacity: 0;
-  visibility: hidden;
-  pointer-events: none;
-  transition: opacity .2s ease;
+  border-bottom: 1px solid var(--line);
 }
-.sheet.active { opacity: 1; visibility: visible; pointer-events: auto; z-index: 2; }
 
 /* About (includes resume + contact buttons) */
 .about-intro h1 { font-size: clamp(2.8rem, 7vw, 5rem); }
