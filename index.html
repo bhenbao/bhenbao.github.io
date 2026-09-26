@@ -52,8 +52,7 @@
           </div>
 
           <div class="social-row">
-            <a href="https://github.com/bhenbao" target="_blank" rel="noreferrer" aria-label="GitHub"><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg></a>
-            <a href="www.linkedin.com/in/chenhao-sun-880966274" target="_blank" rel="noreferrer" aria-label="LinkedIn"><svg viewBox="0 0 20 20" aria-hidden="true"><rect x="1" y="1" width="18" height="18" rx="4" fill="none" stroke="currentColor" stroke-width="1.6"/><text x="10" y="14.3" font-family="Nunito, sans-serif" font-weight="800" font-size="9" fill="currentColor" text-anchor="middle">in</text></svg></a>
+            <a href="https://www.linkedin.com/in/chenhao-sun-880966274" target="_blank" rel="noreferrer" aria-label="LinkedIn"><svg viewBox="0 0 20 20" aria-hidden="true"><rect x="1" y="1" width="18" height="18" rx="4" fill="none" stroke="currentColor" stroke-width="1.6"/><text x="10" y="14.3" font-family="Nunito, sans-serif" font-weight="800" font-size="9" fill="currentColor" text-anchor="middle">in</text></svg></a>
             <a href="mailto:chenhao.sun11@gmail.com" aria-label="Email"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><rect x="1.5" y="4" width="17" height="12" rx="2"/><path d="M2 5l8 6 8-6"/></svg></a>
           </div>
         </div>
@@ -70,7 +69,6 @@
             <!-- ▼▼▼ EDIT PROJECT 1 HERE ▼▼▼ -->
             <article class="tile">
               <h3>Mars Robot</h3>
-              <!-- Replace with a real description whenever you're ready -->
               <p>Over a 6 week period, I worked in a team of 4 to build an autonomous mars robot from scratch for a robotics competition.
                 I worked on the mechanical arm and claw, chassis, PCBs, and PID tuning, enabling our robot to precisely detect and pick up objects.</p>
               <a href="/project.html">View project ↗</a>
@@ -81,7 +79,6 @@
             <article class="tile">
               <img class="tile-img" src="/assets/images/project-antenna.jpg" alt="Assembling the antenna deployer module" loading="lazy" />
               <h3>Antenna Deployer Module</h3>
-              <!-- Replace with a real description whenever you're ready -->
               <p>As a part of UBC Orbit, a CubeSat design team, I lead the design structural design of our antenna deployer module. This includes custom designing
                 a burn-wire door release mechanism, integrating electrical components, and conducting tests.</p>
               <a href="/project.html">View project ↗</a>
@@ -160,19 +157,27 @@
       var sheets = document.querySelectorAll('.sheet');
       var navButtons = document.querySelectorAll('[data-target]');
 
-      function show(id) {
-        sheets.forEach(function (s) { s.classList.toggle('active', s.id === id); });
-        if (document.getElementById(id)) document.getElementById(id).scrollTop = 0;
-        navButtons.forEach(function (b) { b.setAttribute('aria-current', b.dataset.target === id ? 'true' : 'false'); });
+      function goTo(id, smooth) {
+        var el = document.getElementById(id);
+        if (el) el.scrollIntoView({ behavior: smooth === false ? 'auto' : 'smooth', block: 'start' });
         history.replaceState(null, '', '#' + id);
       }
 
       navButtons.forEach(function (b) {
-        b.addEventListener('click', function () { show(b.dataset.target); });
+        b.addEventListener('click', function () { goTo(b.dataset.target); });
       });
 
-      var startId = order.indexOf(location.hash.slice(1)) !== -1 ? location.hash.slice(1) : 'about';
-      show(startId);
+      var observer = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            navButtons.forEach(function (b) { b.setAttribute('aria-current', b.dataset.target === entry.target.id ? 'true' : 'false'); });
+          }
+        });
+      }, { rootMargin: '-40% 0px -55% 0px' });
+      sheets.forEach(function (s) { observer.observe(s); });
+
+      var startId = order.indexOf(location.hash.slice(1)) !== -1 ? location.hash.slice(1) : null;
+      if (startId) goTo(startId, false);
 
       // Photo carousel — crossfades automatically, no arrows or dots
       var carousel = document.getElementById('photoCarousel');
@@ -180,7 +185,7 @@
         var imgs = Array.prototype.slice.call(carousel.querySelectorAll('img'));
         var current = 0;
         if (imgs[0]) imgs[0].classList.add('active');
-        if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches && imgs.length > 1) {
+        if (imgs.length > 1) {
           setInterval(function () {
             imgs[current].classList.remove('active');
             current = (current + 1) % imgs.length;
