@@ -25,6 +25,15 @@
       .proj-hero-carousel .photo-carousel.contain img { object-fit: contain; }
       .proj-container p { color: var(--muted); font-size: 1.05rem; max-width: 640px; margin: 0 0 1.4rem; }
       .proj-links { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 2rem; }
+
+      /* Hover swap: first image shows by default, second fades in on hover/focus/tap */
+      .photo-carousel.hover-swap { cursor: pointer; }
+      .photo-carousel.hover-swap img:first-child { opacity: 1; }
+      .photo-carousel.hover-swap:hover img:first-child,
+      .photo-carousel.hover-swap:focus img:first-child { opacity: 0; }
+      .photo-carousel.hover-swap:hover img:last-child,
+      .photo-carousel.hover-swap:focus img:last-child { opacity: 1; }
+      .hover-hint { display: block; color: var(--muted); font-size: .85rem; margin-top: .7rem; }
     </style>
   </head>
   <body>
@@ -35,10 +44,11 @@
         <h1>Antenna Deployer Module</h1>
         <span class="proj-meta">UBC Orbit · Mechanical Design Developer</span>
 
-        <!-- Add more <img> tags here and the carousel will crossfade through them -->
+        <!-- Hover (or tap) the image to fade from the coiled state to the deployed state -->
         <div class="proj-hero-carousel photo-carousel-wrap">
-          <div class="photo-carousel contain" id="projPhotoCarousel">
-            <img src="/assets/images/adm-cad.png" alt="CAD render of the antenna deployer module with PCB and GPS module" loading="lazy" />
+          <div class="photo-carousel contain hover-swap" tabindex="0">
+            <img src="/assets/images/adm-coil-cad.png" alt="CAD render of the antenna deployer module with the antennas coiled" />
+            <img src="/assets/images/adm-deploy-cad.png" alt="CAD render of the antenna deployer module with the antennas deployed" />
           </div>
         </div>
 
@@ -46,20 +56,5 @@
         <p>[ Add a second paragraph on the burn-wire mechanism, testing, and what you learned. ]</p>
       </div>
     </div>
-    <script>
-      var projCarousel = document.getElementById('projPhotoCarousel');
-      if (projCarousel) {
-        var pImgs = Array.prototype.slice.call(projCarousel.querySelectorAll('img'));
-        var pCurrent = 0;
-        if (pImgs[0]) pImgs[0].classList.add('active');
-        if (pImgs.length > 1) {
-          setInterval(function () {
-            pImgs[pCurrent].classList.remove('active');
-            pCurrent = (pCurrent + 1) % pImgs.length;
-            pImgs[pCurrent].classList.add('active');
-          }, 4000);
-        }
-      }
-    </script>
   </body>
 </html>
