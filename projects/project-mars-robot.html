@@ -17,14 +17,39 @@
       .back-link { display: inline-flex; align-items: center; gap: 8px; color: var(--muted); text-decoration: none; font-weight: 700; font-size: .9rem; margin-bottom: 2.4rem; }
       .back-link:hover { color: var(--pink); }
       .proj-container h1 { font-size: clamp(2.2rem, 5.5vw, 3.4rem); margin-bottom: .6rem; }
+      .proj-container h2 { font-size: clamp(1.4rem, 3.2vw, 1.9rem); margin: 2.8rem 0 1rem; }
       .proj-meta { color: var(--pink); font-family: 'Fraunces', serif; font-style: italic; font-weight: 500; font-size: 1.15rem; margin-bottom: 2rem; display: block; }
       .proj-hero-carousel { margin-bottom: 2.4rem; }
-      .proj-hero-carousel .photo-carousel { height: 420px; }
+      .proj-hero-carousel .photo-carousel { height: 420px; touch-action: pan-y; }
       /* CAD renders: show the whole image (no cropping) on a white backdrop */
       .proj-hero-carousel .photo-carousel.contain { background: #fff; }
       .proj-hero-carousel .photo-carousel.contain img { object-fit: contain; }
+      /* Electronics: show the whole image on a dark backdrop */
+      .proj-hero-carousel .photo-carousel.contain-dark { background: var(--brown-dark); }
+      .proj-hero-carousel .photo-carousel.contain-dark img { object-fit: contain; }
+      .carousel-caption { display: block; color: var(--muted); font-size: .88rem; margin-top: .7rem; }
       .proj-container p { color: var(--muted); font-size: 1.05rem; max-width: 640px; margin: 0 0 1.4rem; }
       .proj-links { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 2rem; }
+
+      /* Manual carousel controls */
+      .car-btn { position: absolute; top: 50%; transform: translateY(-50%); z-index: 2; width: 42px; height: 42px; border-radius: 50%; border: 1.5px solid var(--line); background: rgba(47, 36, 29, .75); color: var(--white); font-size: 1.5rem; line-height: 1; cursor: pointer; display: flex; align-items: center; justify-content: center; padding: 0 0 3px; }
+      .car-btn:hover { background: var(--pink); color: var(--brown-dark); }
+      .car-prev { left: 12px; }
+      .car-next { right: 12px; }
+      .car-dots { display: flex; justify-content: center; gap: 10px; margin-top: .9rem; }
+      .car-dot { width: 10px; height: 10px; padding: 0; border-radius: 50%; border: 1.5px solid var(--muted); background: transparent; cursor: pointer; }
+      .car-dot:hover { border-color: var(--pink); }
+      .car-dot[aria-current="true"] { background: var(--pink); border-color: var(--pink); }
+
+      /* Demo videos (main focus) */
+      .proj-video-block { margin: 0 0 2rem; }
+      .proj-video { display: block; width: 100%; height: auto; border-radius: 16px 6px 16px 6px; border: 1.5px solid var(--line); background: var(--brown-dark); }
+      .proj-video-block figcaption { color: var(--muted); font-size: .92rem; margin-top: .7rem; }
+
+      @media (max-width: 760px) {
+        .proj-hero-carousel .photo-carousel { height: 280px; }
+        .car-btn { width: 36px; height: 36px; font-size: 1.3rem; }
+      }
     </style>
   </head>
   <body>
@@ -35,31 +60,115 @@
         <h1>Mars Robot</h1>
         <span class="proj-meta">Robotics competition · Team of 4 · 6 weeks</span>
 
-        <!-- Add more <img> tags here and the carousel will crossfade through them -->
-        <div class="proj-hero-carousel photo-carousel-wrap">
-          <div class="photo-carousel contain" id="projPhotoCarousel">
-            <img src="/assets/images/rs-arm-cad.png" alt="CAD render of the Mars robot's mechanical arm and claw" loading="lazy" />
-          </div>
-        </div>
-
         <p>Over a 6 week period, I worked in a team of 4 to build an autonomous Mars robot from scratch for a robotics competition. I worked on the mechanical arm and claw, chassis, PCBs, and PID tuning, enabling our robot to precisely detect and pick up objects.</p>
-        <p>[ Add a second paragraph on the design process, challenges, and what you learned. ]</p>
+
+        <!-- ▼▼▼ DEMO VIDEOS (main focus) ▼▼▼ -->
+        <h2>The robot in action</h2>
+
+        <figure class="proj-video-block">
+          <video class="proj-video" controls playsinline preload="metadata" aria-label="Mars robot picking up a rock">
+            <source src="/assets/videos/rs-rock.mp4#t=0.1" type="video/mp4" />
+          </video>
+          <figcaption>Picking up a rock with the arm and claw.</figcaption>
+        </figure>
+
+        <figure class="proj-video-block">
+          <video class="proj-video" controls playsinline preload="metadata" aria-label="Mars robot picking up a solar panel">
+            <source src="/assets/videos/rs-solarpanel.mp4#t=0.1" type="video/mp4" />
+          </video>
+          <figcaption>Picking up the solar panel.</figcaption>
+        </figure>
+        <!-- ▲▲▲ END DEMO VIDEOS ▲▲▲ -->
+
+        <!-- ▼▼▼ MECHANICAL CAROUSEL ▼▼▼ -->
+        <h2>Mechanical design</h2>
+        <div class="proj-hero-carousel photo-carousel-wrap">
+          <div class="photo-carousel contain" tabindex="0" aria-label="Mechanical design images">
+            <img src="/assets/images/rs-arm-cad.png" alt="CAD render of the Mars robot's mechanical arm" />
+            <img src="/assets/images/rs-claw-cad.png" alt="CAD render of the Mars robot's claw" loading="lazy" />
+            <img src="/assets/images/rs-full-cad.png" alt="CAD render of the full Mars robot assembly" loading="lazy" />
+          </div>
+          <span class="carousel-caption">Arm, claw, and full robot assembly.</span>
+        </div>
+        <!-- ▲▲▲ END MECHANICAL CAROUSEL ▲▲▲ -->
+
+        <!-- ▼▼▼ ELECTRONICS CAROUSEL ▼▼▼ -->
+        <h2>Electronics</h2>
+        <div class="proj-hero-carousel photo-carousel-wrap">
+          <div class="photo-carousel contain-dark" tabindex="0" aria-label="Electronics images">
+            <img src="/assets/images/rs-allPCBs.png" alt="All of the custom PCBs designed for the Mars robot" />
+            <img src="/assets/images/rs-stepperPCB-3D.png" alt="3D render of the stepper motor PCB" loading="lazy" />
+            <img src="/assets/images/rs-stepperPCB-2D.png" alt="2D layout of the stepper motor PCB" loading="lazy" />
+          </div>
+          <span class="carousel-caption">All custom PCBs, plus the stepper PCB in 3D and 2D.</span>
+        </div>
+        <!-- ▲▲▲ END ELECTRONICS CAROUSEL ▲▲▲ -->
+
+        <p>[ Add a paragraph on the design process, challenges, and what you learned. ]</p>
       </div>
     </div>
     <script>
-      var projCarousel = document.getElementById('projPhotoCarousel');
-      if (projCarousel) {
-        var pImgs = Array.prototype.slice.call(projCarousel.querySelectorAll('img'));
-        var pCurrent = 0;
-        if (pImgs[0]) pImgs[0].classList.add('active');
-        if (pImgs.length > 1) {
-          setInterval(function () {
-            pImgs[pCurrent].classList.remove('active');
-            pCurrent = (pCurrent + 1) % pImgs.length;
-            pImgs[pCurrent].classList.add('active');
-          }, 4000);
+      // Manual carousels: arrows, dots, swipe, and keyboard. No auto-advance.
+      document.querySelectorAll('.photo-carousel').forEach(function (carousel) {
+        var slides = Array.prototype.slice.call(carousel.querySelectorAll('img'));
+        if (!slides.length) return;
+        var current = 0;
+        var dots = [];
+
+        function show(n) {
+          slides[current].classList.remove('active');
+          dots[current] && dots[current].setAttribute('aria-current', 'false');
+          current = (n + slides.length) % slides.length;
+          slides[current].classList.add('active');
+          dots[current] && dots[current].setAttribute('aria-current', 'true');
         }
-      }
+
+        if (slides.length > 1) {
+          var prev = document.createElement('button');
+          prev.type = 'button'; prev.className = 'car-btn car-prev';
+          prev.setAttribute('aria-label', 'Previous image'); prev.innerHTML = '&#8249;';
+          prev.addEventListener('click', function () { show(current - 1); });
+
+          var next = document.createElement('button');
+          next.type = 'button'; next.className = 'car-btn car-next';
+          next.setAttribute('aria-label', 'Next image'); next.innerHTML = '&#8250;';
+          next.addEventListener('click', function () { show(current + 1); });
+
+          carousel.appendChild(prev);
+          carousel.appendChild(next);
+
+          var dotWrap = document.createElement('div');
+          dotWrap.className = 'car-dots';
+          slides.forEach(function (s, i) {
+            var d = document.createElement('button');
+            d.type = 'button'; d.className = 'car-dot';
+            d.setAttribute('aria-label', 'Show image ' + (i + 1));
+            d.setAttribute('aria-current', i === 0 ? 'true' : 'false');
+            d.addEventListener('click', function () { show(i); });
+            dots.push(d);
+            dotWrap.appendChild(d);
+          });
+          carousel.after(dotWrap);
+
+          // Keyboard
+          carousel.addEventListener('keydown', function (e) {
+            if (e.key === 'ArrowLeft') { show(current - 1); e.preventDefault(); }
+            if (e.key === 'ArrowRight') { show(current + 1); e.preventDefault(); }
+          });
+
+          // Swipe
+          var startX = null;
+          carousel.addEventListener('touchstart', function (e) { startX = e.touches[0].clientX; }, { passive: true });
+          carousel.addEventListener('touchend', function (e) {
+            if (startX === null) return;
+            var dx = e.changedTouches[0].clientX - startX;
+            if (Math.abs(dx) > 40) show(current + (dx < 0 ? 1 : -1));
+            startX = null;
+          });
+        }
+
+        slides[0].classList.add('active');
+      });
     </script>
   </body>
 </html>
