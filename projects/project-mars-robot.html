@@ -12,39 +12,39 @@
     <link rel="stylesheet" href="/assets/css/style.css" />
     <style>
       body { overflow: auto; height: auto; min-height: 100vh; display: block; }
-      .proj-wrap { background-color: var(--bg); background-image: var(--doodles), var(--grid); background-repeat: repeat, repeat; background-size: 360px 360px, 42px 42px; min-height: 100vh; padding: 70px 0 100px; }
+      .proj-wrap { background-color: var(--brown); background-image: var(--doodles), var(--grid); background-repeat: repeat, repeat; background-size: 360px 360px, 42px 42px; min-height: 100vh; padding: 70px 0 100px; }
       .proj-container { width: min(760px, calc(100% - 56px)); margin: 0 auto; }
-      .back-link { display: inline-flex; align-items: center; gap: 8px; color: var(--text-muted); text-decoration: none; font-weight: 700; font-size: .9rem; margin-bottom: 2.4rem; }
-      .back-link:hover { color: var(--accent); }
+      .back-link { display: inline-flex; align-items: center; gap: 8px; color: var(--muted); text-decoration: none; font-weight: 700; font-size: .9rem; margin-bottom: 2.4rem; }
+      .back-link:hover { color: var(--pink); }
       .proj-container h1 { font-size: clamp(2.2rem, 5.5vw, 3.4rem); margin-bottom: .6rem; }
       .proj-container h2 { font-size: clamp(1.4rem, 3.2vw, 1.9rem); margin: 2.8rem 0 1rem; }
-      .proj-meta { color: var(--accent); font-family: 'Fraunces', serif; font-style: italic; font-weight: 500; font-size: 1.15rem; margin-bottom: 2rem; display: block; }
+      .proj-meta { color: var(--pink); font-family: 'Fraunces', serif; font-style: italic; font-weight: 500; font-size: 1.15rem; margin-bottom: 2rem; display: block; }
       .proj-hero-carousel { margin-bottom: 2.4rem; }
       .proj-hero-carousel .photo-carousel { height: 420px; touch-action: pan-y; }
       /* CAD renders: show the whole image (no cropping) on a white backdrop */
       .proj-hero-carousel .photo-carousel.contain { background: #fff; }
       .proj-hero-carousel .photo-carousel.contain img { object-fit: contain; }
       /* Electronics: show the whole image on a dark backdrop */
-      .proj-hero-carousel .photo-carousel.contain-dark { background: var(--bg-dark); }
+      .proj-hero-carousel .photo-carousel.contain-dark { background: var(--brown-dark); }
       .proj-hero-carousel .photo-carousel.contain-dark img { object-fit: contain; }
-      .carousel-caption { display: block; color: var(--text-muted); font-size: .88rem; margin-top: .7rem; }
-      .proj-container p { color: var(--text-muted); font-size: 1.05rem; max-width: 640px; margin: 0 0 1.4rem; }
+      .carousel-caption { display: block; color: var(--muted); font-size: .88rem; margin-top: .7rem; }
+      .proj-container p { color: var(--muted); font-size: 1.05rem; max-width: 640px; margin: 0 0 1.4rem; }
       .proj-links { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 2rem; }
 
       /* Manual carousel controls */
-      .car-btn { position: absolute; top: 50%; transform: translateY(-50%); z-index: 2; width: 42px; height: 42px; border-radius: 50%; border: 1.5px solid var(--line); background: rgba(66, 4, 51, .75); color: var(--text); font-size: 1.5rem; line-height: 1; cursor: pointer; display: flex; align-items: center; justify-content: center; padding: 0 0 3px; }
-      .car-btn:hover { background: var(--accent); color: var(--bg-dark); }
+      .car-btn { position: absolute; top: 50%; transform: translateY(-50%); z-index: 2; width: 42px; height: 42px; border-radius: 50%; border: 1.5px solid var(--line); background: rgba(47, 36, 29, .75); color: var(--white); font-size: 1.5rem; line-height: 1; cursor: pointer; display: flex; align-items: center; justify-content: center; padding: 0 0 3px; }
+      .car-btn:hover { background: var(--pink); color: var(--brown-dark); }
       .car-prev { left: 12px; }
       .car-next { right: 12px; }
       .car-dots { display: flex; justify-content: center; gap: 10px; margin-top: .9rem; }
-      .car-dot { width: 10px; height: 10px; padding: 0; border-radius: 50%; border: 1.5px solid var(--text-muted); background: transparent; cursor: pointer; }
-      .car-dot:hover { border-color: var(--accent); }
-      .car-dot[aria-current="true"] { background: var(--accent); border-color: var(--accent); }
+      .car-dot { width: 10px; height: 10px; padding: 0; border-radius: 50%; border: 1.5px solid var(--muted); background: transparent; cursor: pointer; }
+      .car-dot:hover { border-color: var(--pink); }
+      .car-dot[aria-current="true"] { background: var(--pink); border-color: var(--pink); }
 
       /* Demo videos (main focus) */
       .proj-video-block { margin: 0 0 2rem; }
-      .proj-video { display: block; width: 100%; height: auto; border-radius: 16px 6px 16px 6px; border: 1.5px solid var(--line); background: var(--bg-dark); }
-      .proj-video-block figcaption { color: var(--text-muted); font-size: .92rem; margin-top: .7rem; }
+      .proj-video { display: block; width: 100%; height: auto; border-radius: 16px 6px 16px 6px; border: 1.5px solid var(--line); background: var(--brown-dark); }
+      .proj-video-block figcaption { color: var(--muted); font-size: .92rem; margin-top: .7rem; }
 
       @media (max-width: 760px) {
         .proj-hero-carousel .photo-carousel { height: 280px; }
