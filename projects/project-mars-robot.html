@@ -91,7 +91,10 @@
           <span class="carousel-caption">Full robot assembly, arm, and claw CAD renders</span>
         </div>
 
-        <p>The arm is laser-cut from Delrin and has three degrees of freedom: a stepper motor rotates the base, while two high-torque servos move the arm up and down and forward and back. The claw is 3D printed and driven by a third servo. My first design coupled the arm to the motor shaft with pins, but testing showed too much deflection, so I redesigned the joints to use screws instead.</p>
+        <p>The pieces for the arm were laser-cut from Delrin, with a 3D printed base and custom 3D-print shaft collars.
+          It has three degrees of freedom: a stepper motor rotates the base, while two high-torque servos move the arm up and down and forward and back.
+          The claw is 3D printed and driven by a third servo. My first design coupled the arm to the motor shaft with pins,
+          but testing showed too much deflection, so we redesigned the joints to use screws instead.</p>
         <!-- ▲▲▲ END MECHANICAL CAROUSEL ▲▲▲ -->
 
         <!-- ▼▼▼ ELECTRONICS CAROUSEL ▼▼▼ -->
@@ -105,12 +108,18 @@
           <span class="carousel-caption">All custom PCBs and stepper motor PCB.</span>
         </div>
 
-        <p>I designed the stepper motor board in Altium, which drives the motor that rotates the arm, and helped solder the team's other boards. To find the rock containing metal, we built a metal-detecting circuit based on a Colpitts oscillator. A K230 vision module handled detection of the teletubby, the rocks, and the loop on the solar panel.</p>
+        <p>I helped designed the stepper motor board in Altium, which drives the motor that rotates the arm
+          and solder the boards. To find the rock containing metal, we built a metal-detecting circuit based on a Colpitts oscillator.
+          A K230 vision module handled detection of the teletubby, the rocks, and the loop on the solar panel.</p>
         <!-- ▲▲▲ END ELECTRONICS CAROUSEL ▲▲▲ -->
 
         <!-- ▼▼▼ CHALLENGES ▼▼▼ -->
         <h2>Challenges</h2>
-        <p>I helped tune the x and y terms of the robot's PID control, which lined it up with objects before it picked them up. Early on, the control was unreliable because of electromagnetic interference from the motors. We first thought software debouncing would be enough, but it only filtered electrical noise, not magnetic interference. We solved it by building a protoboard PCB for hardware debouncing. In hindsight, I'd plan for EMI in the board layout from the start instead of patching it in later.</p>
+        <p>I also helped tune the robot's PID control, which lined it up with objects before it picked them up.
+          Early on, the control was unreliable because of electromagnetic interference from the motors.
+          We first thought software debouncing would be enough, but it only filtered electrical noise, not magnetic interference.
+          We solved it by building a protoboard PCB for hardware debouncing, however, this taught us important lessons about including
+          sufficient testing time. </p>
         <!-- ▲▲▲ END CHALLENGES ▲▲▲ -->
       </div>
     </div>
