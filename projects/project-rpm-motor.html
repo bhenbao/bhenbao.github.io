@@ -1,0 +1,228 @@
+---
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="RPM motor speed controller — a closed-loop motor speed control circuit built from discrete analog and digital ICs. Chenhao Sun." />
+    <title>RPM Motor Controller — Chenhao Sun</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,600;0,700;0,900;1,500&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="/assets/css/style.css" />
+    <style>
+      body { overflow: auto; height: auto; min-height: 100vh; display: block; }
+      .proj-wrap { background-color: var(--brown); background-image: var(--doodles), var(--grid); background-repeat: repeat, repeat; background-size: 360px 360px, 42px 42px; min-height: 100vh; padding: 70px 0 100px; }
+      .proj-container { width: min(760px, calc(100% - 56px)); margin: 0 auto; }
+      .back-link { display: inline-flex; align-items: center; gap: 8px; color: var(--muted); text-decoration: none; font-weight: 700; font-size: .9rem; margin-bottom: 2.4rem; }
+      .back-link:hover { color: var(--pink); }
+      .proj-container h1 { font-size: clamp(2.2rem, 5.5vw, 3.4rem); margin-bottom: .6rem; }
+      .proj-container h2 { font-size: clamp(1.4rem, 3.2vw, 1.9rem); margin: 2.8rem 0 1rem; }
+      .proj-meta { color: var(--pink); font-family: 'Fraunces', serif; font-style: italic; font-weight: 500; font-size: 1.15rem; margin-bottom: 2rem; display: block; }
+      .proj-hero-carousel { margin-bottom: 2.4rem; }
+      .proj-hero-carousel .photo-carousel { height: 420px; touch-action: pan-y; }
+      /* Scope screenshots and diagrams: show the whole image (no cropping) on a white backdrop */
+      .proj-hero-carousel .photo-carousel.contain { background: #fff; }
+      .proj-hero-carousel .photo-carousel.contain img { object-fit: contain; }
+      .carousel-caption { display: block; color: var(--muted); font-size: .88rem; margin-top: .7rem; }
+      .proj-container p { color: var(--muted); font-size: 1.05rem; max-width: 640px; margin: 0 0 1.4rem; }
+      .proj-container strong { color: var(--white); }
+
+      /* Manual carousel controls */
+      .car-btn { position: absolute; top: 50%; transform: translateY(-50%); z-index: 2; width: 42px; height: 42px; border-radius: 50%; border: 1.5px solid var(--line); background: rgba(47, 36, 29, .75); color: var(--white); font-size: 1.5rem; line-height: 1; cursor: pointer; display: flex; align-items: center; justify-content: center; padding: 0 0 3px; }
+      .car-btn:hover { background: var(--pink); color: var(--brown-dark); }
+      .car-prev { left: 12px; }
+      .car-next { right: 12px; }
+      .car-dots { display: flex; justify-content: center; gap: 10px; margin-top: .9rem; }
+      .car-dot { width: 10px; height: 10px; padding: 0; border-radius: 50%; border: 1.5px solid var(--muted); background: transparent; cursor: pointer; }
+      .car-dot:hover { border-color: var(--pink); }
+      .car-dot[aria-current="true"] { background: var(--pink); border-color: var(--pink); }
+
+      /* Diagram + chart panels (scroll sideways on narrow screens instead of shrinking the text) */
+      .viz { background: var(--panel); border: 1.5px solid var(--line); border-radius: 26px 10px 26px 10px; padding: 22px 18px 14px; overflow-x: auto; margin-bottom: .8rem; }
+
+      /* Tall figures side by side */
+      .fig-row { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-bottom: .8rem; }
+      .fig-row a { display: flex; justify-content: center; align-items: center; background: var(--brown-dark); border: 1.5px solid var(--line); border-radius: 16px 6px 16px 6px; overflow: hidden; }
+      .fig-row img { display: block; max-width: 100%; max-height: 560px; width: auto; height: auto; }
+
+      @media (max-width: 760px) {
+        .proj-hero-carousel .photo-carousel { height: 280px; }
+        .car-btn { width: 36px; height: 36px; font-size: 1.3rem; }
+        .fig-row { grid-template-columns: 1fr; }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="proj-wrap">
+      <div class="proj-container">
+        <a class="back-link" href="/#work">‹ Back to projects</a>
+
+        <h1>RPM Motor Controller</h1>
+        <span class="proj-meta">Circuits lab final project · Analog + digital design</span>
+
+        <p>For my circuits lab final project, I designed and built a closed-loop speed controller for a DC motor using only discrete ICs and op-amps, with no microcontroller. A dial sets the target speed, an optical sensor measures how fast the motor is actually spinning, and an integrating error amplifier adjusts the motor drive until the two match. Across the dial's range, the motor's speed scaled from about 400 to 4,000 RPM.</p>
+
+        <!-- ▼▼▼ BLOCK DIAGRAM ▼▼▼ -->
+        <h2>How it works</h2>
+        <div class="viz">
+<svg viewBox="0 0 720 365" role="img" aria-label="Block diagram: a setpoint potentiometer and the DAC feed an error amplifier, which drives a BJT and the motor; a slotted disc and phototransistor produce pulses counted by a counter, saved by a latch and converted back to a voltage by a DAC; a timing circuit generates the latch and reset pulses" style="width:100%;min-width:600px;height:auto;display:block">
+  <style>.t1{font-size:15px;font-weight:700;fill:var(--white)} .t2{font-size:12px;fill:var(--muted)} .lab{font-size:12px;fill:var(--muted)}</style>
+  <defs><marker id="arr" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" style="fill:var(--pink)"/></marker></defs>
+  <text x="104" y="20" class="lab">Setpoint (potentiometer)</text>
+  <rect x="20" y="55" width="140" height="50" rx="12" style="fill:var(--panel);stroke:var(--pink)" stroke-opacity=".45" stroke-width="1.5"/><text x="90.0" y="77" text-anchor="middle" class="t1">Error amplifier</text><text x="90.0" y="94" text-anchor="middle" class="t2">PI op-amp</text><rect x="200" y="55" width="140" height="50" rx="12" style="fill:var(--panel);stroke:var(--pink)" stroke-opacity=".45" stroke-width="1.5"/><text x="270.0" y="77" text-anchor="middle" class="t1">BJT driver</text><text x="270.0" y="94" text-anchor="middle" class="t2">flyback diode</text><rect x="380" y="55" width="140" height="50" rx="12" style="fill:var(--panel);stroke:var(--pink)" stroke-opacity=".45" stroke-width="1.5"/><text x="450.0" y="77" text-anchor="middle" class="t1">Motor + disc</text><text x="450.0" y="94" text-anchor="middle" class="t2">10 holes per rev</text><rect x="560" y="55" width="140" height="50" rx="12" style="fill:var(--panel);stroke:var(--pink)" stroke-opacity=".45" stroke-width="1.5"/><text x="630.0" y="77" text-anchor="middle" class="t1">Phototransistor</text><text x="630.0" y="94" text-anchor="middle" class="t2">clock pulses</text><rect x="560" y="205" width="140" height="50" rx="12" style="fill:var(--panel);stroke:var(--pink)" stroke-opacity=".45" stroke-width="1.5"/><text x="630.0" y="227" text-anchor="middle" class="t1">Counter ÷256</text><text x="630.0" y="244" text-anchor="middle" class="t2">counts pulses</text><rect x="380" y="205" width="140" height="50" rx="12" style="fill:var(--panel);stroke:var(--pink)" stroke-opacity=".45" stroke-width="1.5"/><text x="450.0" y="227" text-anchor="middle" class="t1">8-bit D-latch</text><text x="450.0" y="244" text-anchor="middle" class="t2">saves the count</text><rect x="200" y="205" width="140" height="50" rx="12" style="fill:var(--panel);stroke:var(--pink)" stroke-opacity=".45" stroke-width="1.5"/><text x="270.0" y="227" text-anchor="middle" class="t1">R-2R DAC</text><text x="270.0" y="244" text-anchor="middle" class="t2">count → voltage</text><rect x="380" y="300" width="320" height="48" rx="12" style="fill:var(--panel);stroke:var(--pink)" stroke-opacity=".45" stroke-width="1.5"/><text x="540.0" y="322" text-anchor="middle" class="t1">Latch + reset timing</text><text x="540.0" y="339" text-anchor="middle" class="t2">Schmitt-trigger RC, 5 Hz</text><path d="M90,30 V53" fill="none" style="stroke:var(--pink)" stroke-width="1.8" marker-end="url(#arr)"/><path d="M160,80 H198" fill="none" style="stroke:var(--pink)" stroke-width="1.8" marker-end="url(#arr)"/><path d="M340,80 H378" fill="none" style="stroke:var(--pink)" stroke-width="1.8" marker-end="url(#arr)"/><path d="M520,80 H558" fill="none" style="stroke:var(--pink)" stroke-width="1.8" marker-end="url(#arr)"/><path d="M630,105 V203" fill="none" style="stroke:var(--pink)" stroke-width="1.8" marker-end="url(#arr)"/><path d="M560,230 H522" fill="none" style="stroke:var(--pink)" stroke-width="1.8" marker-end="url(#arr)"/><path d="M380,230 H342" fill="none" style="stroke:var(--pink)" stroke-width="1.8" marker-end="url(#arr)"/><path d="M200,230 H90 V107" fill="none" style="stroke:var(--pink)" stroke-width="1.8" marker-end="url(#arr)"/><path d="M450,300 V257" fill="none" style="stroke:var(--pink)" stroke-width="1.8" marker-end="url(#arr)"/><path d="M630,300 V257" fill="none" style="stroke:var(--pink)" stroke-width="1.8" marker-end="url(#arr)"/>
+  <text x="108" y="222" class="lab">measured speed</text>
+  <text x="458" y="284" class="lab">latch</text>
+  <text x="638" y="284" class="lab">reset</text>
+  <text x="640" y="160" class="lab">pulses</text>
+</svg>
+        </div>
+        <span class="carousel-caption" style="margin-bottom:1.6rem">System block diagram: the speed measurement loops back into the error amplifier.</span>
+
+        <p>The motor shaft carries a disc with 10 holes, and a phototransistor produces a clock pulse each time a hole passes, so 10 pulses make one revolution. A 5 Hz timing signal defines a 0.2 s window: at the end of each window, a latch pulse saves the counter's value, and a slightly delayed reset pulse clears the counter for the next window. The saved count is proportional to speed, <strong>RPM = 30 × count</strong>.</p>
+        <p>An R-2R ladder DAC turns the saved count into a voltage. An op-amp with an R–C feedback network compares that voltage with the setpoint, which comes from a potentiometer, and acts as a proportional-integral (PI) controller: while the motor is too fast the output ramps down, and while it's too slow the output ramps up. A BJT with a flyback diode drives the motor.</p>
+        <!-- ▲▲▲ END BLOCK DIAGRAM ▲▲▲ -->
+
+        <!-- ▼▼▼ TIMING CAROUSEL ▼▼▼ -->
+        <h2>Timing: latch and reset pulses</h2>
+        <div class="proj-hero-carousel photo-carousel-wrap">
+          <div class="photo-carousel contain" tabindex="0" aria-label="Latch and reset generator images">
+            <img src="/assets/images/rpm-latch-diagram.png" alt="Circuit diagram of the latch and reset pulse generator built from Schmitt-trigger inverters" />
+            <img src="/assets/images/rpm-delay-scope.png" alt="Oscilloscope capture measuring an 11.06 microsecond delay between the latch and reset signals" loading="lazy" />
+            <img src="/assets/images/rpm-reset-pulse.png" alt="Oscilloscope capture of the reset pulse" loading="lazy" />
+          </div>
+          <span class="carousel-caption">Circuit diagram, delay measurement, and reset pulse.</span>
+        </div>
+        <p>The counter has to be cleared right after the latch captures its value, so the reset is generated from a delayed copy of the latch signal. A Schmitt-trigger inverter turns the slowly charging RC node (11 kΩ and 1 nF) into a clean edge, and a small differentiator (47 pF and 11 kΩ) turns that edge into a short reset pulse. From the capacitor charging equation and the inverter's threshold voltage, I predicted a delay of 10.8 µs and measured 11.06 µs on the scope.</p>
+        <!-- ▲▲▲ END TIMING CAROUSEL ▲▲▲ -->
+
+        <!-- ▼▼▼ COUNT / CONVERT CAROUSEL ▼▼▼ -->
+        <h2>Counting and converting</h2>
+        <div class="proj-hero-carousel photo-carousel-wrap">
+          <div class="photo-carousel contain" tabindex="0" aria-label="Counter, latch and DAC images">
+            <img src="/assets/images/rpm-counter-logic.png" alt="Logic analyzer capture of the divide-by-256 counter counting up" />
+            <img src="/assets/images/rpm-latch-logic.png" alt="Logic analyzer capture of the D-latch output stepping in multiples of ten" loading="lazy" />
+            <img src="/assets/images/rpm-dac-scope.png" alt="Oscilloscope capture of the DAC output, a sawtooth that steps up as the count rises" loading="lazy" />
+          </div>
+          <span class="carousel-caption">Counter, latch, and DAC outputs.</span>
+        </div>
+        <p>The counter is two cascaded 4-bit counters, giving 8 bits that feed an 8-bit D-latch and the R-2R DAC. I tested each stage on its own before connecting the next. With a 100 Hz counter clock and a 10 Hz latch clock, the latch output stepped in multiples of ten, as expected. The DAC output was a sawtooth that stepped up as the count rose and dropped when the counter reset.</p>
+        <!-- ▲▲▲ END COUNT / CONVERT CAROUSEL ▲▲▲ -->
+
+        <!-- ▼▼▼ ERROR AMP CAROUSEL ▼▼▼ -->
+        <h2>The error amplifier</h2>
+        <div class="proj-hero-carousel photo-carousel-wrap">
+          <div class="photo-carousel contain" tabindex="0" aria-label="Error amplifier images">
+            <img src="/assets/images/rpm-error-diagram.png" alt="Circuit diagram of the op-amp error signal amplifier" />
+            <img src="/assets/images/rpm-error-scope.png" alt="Oscilloscope capture of a square wave input and the error amplifier output ramping up and down" loading="lazy" />
+            <img src="/assets/images/rpm-error-photo.jpg" alt="Breadboard photo of the error signal amplifier with labeled components" loading="lazy" />
+          </div>
+          <span class="carousel-caption">Circuit diagram, input and output waveforms, and the breadboard build.</span>
+        </div>
+        <p>I derived the amplifier's output from an ideal op-amp analysis, then tested it with a 5 Hz square wave centred on the 2.5 V setpoint. When the input is above the setpoint, the output ramps down, and when it's below, the output ramps up. That is the behaviour needed to drive the speed error to zero.</p>
+        <!-- ▲▲▲ END ERROR AMP CAROUSEL ▲▲▲ -->
+
+        <!-- ▼▼▼ FULL BUILD ▼▼▼ -->
+        <h2>The full build</h2>
+        <div class="fig-row">
+          <a href="/assets/images/rpm-full-photo.jpg" target="_blank" rel="noreferrer"><img src="/assets/images/rpm-full-photo.jpg" alt="Breadboard photo of the full motor control circuit with labeled chips, wiring, and motor driver" loading="lazy" /></a>
+          <a href="/assets/images/rpm-full-diagram.png" target="_blank" rel="noreferrer"><img src="/assets/images/rpm-full-diagram.png" alt="Full circuit diagram of the motor speed controller" loading="lazy" /></a>
+        </div>
+        <span class="carousel-caption" style="margin-bottom:1.6rem">The complete circuit on a breadboard (left) and its schematic (right). Tap an image to enlarge.</span>
+        <!-- ▲▲▲ END FULL BUILD ▲▲▲ -->
+
+        <!-- ▼▼▼ RESULTS ▼▼▼ -->
+        <h2>Results</h2>
+        <div class="viz">
+<svg viewBox="0 0 720 300" role="img" aria-label="Chart of motor speed in RPM against setpoint voltage, rising almost linearly from 405 RPM at 0.25 V to 4,035 RPM at 2.5 V" style="width:100%;min-width:560px;height:auto;display:block">
+  <style>.ax{font-size:13px;fill:var(--muted)} .pt{font-size:12px;fill:var(--white)} .al{font-size:13px;fill:var(--muted)}</style>
+  <line x1="64" y1="250.0" x2="700" y2="250.0" style="stroke:var(--line)" stroke-width="1"/><text x="54" y="254.0" text-anchor="end" class="ax">0</text><line x1="64" y1="199.8" x2="700" y2="199.8" style="stroke:var(--line)" stroke-width="1"/><text x="54" y="203.8" text-anchor="end" class="ax">1,000</text><line x1="64" y1="149.6" x2="700" y2="149.6" style="stroke:var(--line)" stroke-width="1"/><text x="54" y="153.6" text-anchor="end" class="ax">2,000</text><line x1="64" y1="99.3" x2="700" y2="99.3" style="stroke:var(--line)" stroke-width="1"/><text x="54" y="103.3" text-anchor="end" class="ax">3,000</text><line x1="64" y1="49.1" x2="700" y2="49.1" style="stroke:var(--line)" stroke-width="1"/><text x="54" y="53.1" text-anchor="end" class="ax">4,000</text><text x="64.0" y="270" text-anchor="middle" class="ax">0</text><text x="191.2" y="270" text-anchor="middle" class="ax">0.5</text><text x="318.4" y="270" text-anchor="middle" class="ax">1</text><text x="445.6" y="270" text-anchor="middle" class="ax">1.5</text><text x="572.8" y="270" text-anchor="middle" class="ax">2</text><text x="700.0" y="270" text-anchor="middle" class="ax">2.5</text>
+  <line x1="64" y1="250" x2="700" y2="250" style="stroke:var(--muted)" stroke-width="1.2"/>
+  <line x1="64" y1="24" x2="64" y2="250" style="stroke:var(--muted)" stroke-width="1.2"/>
+  <polyline points="127.6,229.7 191.2,209.3 254.8,189.0 318.4,164.9 445.6,119.7 572.8,80.5 700.0,47.4" fill="none" style="stroke:var(--pink)" stroke-width="2.2" stroke-linejoin="round"/>
+  <circle cx="127.6" cy="229.7" r="4.5" style="fill:var(--pink)"/><circle cx="191.2" cy="209.3" r="4.5" style="fill:var(--pink)"/><circle cx="254.8" cy="189.0" r="4.5" style="fill:var(--pink)"/><circle cx="318.4" cy="164.9" r="4.5" style="fill:var(--pink)"/><circle cx="445.6" cy="119.7" r="4.5" style="fill:var(--pink)"/><circle cx="572.8" cy="80.5" r="4.5" style="fill:var(--pink)"/><circle cx="700.0" cy="47.4" r="4.5" style="fill:var(--pink)"/><text x="135.6" y="247.7" class="pt">405</text><text x="199.2" y="227.3" class="pt">810</text><text x="262.8" y="207.0" class="pt">1,215</text><text x="326.4" y="182.9" class="pt">1,695</text><text x="453.6" y="137.7" class="pt">2,595</text><text x="580.8" y="98.5" class="pt">3,375</text><text x="691.0" y="38.4" text-anchor="end" class="pt">4,035</text>
+  <text x="382.0" y="292" text-anchor="middle" class="al">Setpoint voltage (V)</text>
+  <text x="16" y="137.0" text-anchor="middle" class="al" transform="rotate(-90 16 137.0)">Motor speed (RPM)</text>
+</svg>
+        </div>
+        <span class="carousel-caption" style="margin-bottom:1.6rem">Motor speed against setpoint voltage, from the logic analyzer's latch readings (RPM = 30 × count).</span>
+        <p>The speed rose almost linearly with the setpoint, at roughly 1,600 RPM per volt, from 405 RPM at 0.25 V up to 4,035 RPM at 2.5 V. The top speed is set by the setpoint circuit: the 10 kΩ potentiometer sits in series with a 10 kΩ resistor to 5 V, so the setpoint can't go above 2.5 V.</p>
+        <!-- ▲▲▲ END RESULTS ▲▲▲ -->
+
+        <!-- ▼▼▼ DEBUGGING ▼▼▼ -->
+        <h2>Debugging</h2>
+        <p><strong>A flat, noisy reset signal.</strong> I rewired the circuit, redrew the diagram, and grounded a floating inverter input before finding the real cause: my oscilloscope trigger was set up wrong. Setting the trigger level to 4 V showed the clean pulses that had been there all along.</p>
+        <p><strong>A counter that stopped at 32.</strong> The reset pin on the second counter was tied to the power supply instead of ground. Fixing it restored the full 8-bit count.</p>
+        <p><strong>A motor that stuttered and had only two speeds.</strong> The DAC voltage and the logic analyzer's readings were jumping around, which pointed back to the counter's input. I had misread the inverter's datasheet, with the counter input and the motor clock connected to the wrong sides of the inverter. After rewiring it, the speed responded smoothly to the potentiometer.</p>
+        <!-- ▲▲▲ END DEBUGGING ▲▲▲ -->
+
+        <h2>What I took away</h2>
+        <p>Two Schmitt-trigger inverters in series clean up an edge without inverting it, which keeps timing signals sharp. An integrating op-amp is a simple way to build feedback that keeps correcting until the error is gone. Testing each stage separately before connecting it to the next made every bug much easier to find.</p>
+      </div>
+    </div>
+    <script>
+      // Manual carousels: arrows, dots, swipe, and keyboard. No auto-advance.
+      document.querySelectorAll('.photo-carousel').forEach(function (carousel) {
+        var slides = Array.prototype.slice.call(carousel.querySelectorAll('img'));
+        if (!slides.length) return;
+        var current = 0;
+        var dots = [];
+
+        function show(n) {
+          slides[current].classList.remove('active');
+          dots[current] && dots[current].setAttribute('aria-current', 'false');
+          current = (n + slides.length) % slides.length;
+          slides[current].classList.add('active');
+          dots[current] && dots[current].setAttribute('aria-current', 'true');
+        }
+
+        if (slides.length > 1) {
+          var prev = document.createElement('button');
+          prev.type = 'button'; prev.className = 'car-btn car-prev';
+          prev.setAttribute('aria-label', 'Previous image'); prev.innerHTML = '&#8249;';
+          prev.addEventListener('click', function () { show(current - 1); });
+
+          var next = document.createElement('button');
+          next.type = 'button'; next.className = 'car-btn car-next';
+          next.setAttribute('aria-label', 'Next image'); next.innerHTML = '&#8250;';
+          next.addEventListener('click', function () { show(current + 1); });
+
+          carousel.appendChild(prev);
+          carousel.appendChild(next);
+
+          var dotWrap = document.createElement('div');
+          dotWrap.className = 'car-dots';
+          slides.forEach(function (s, i) {
+            var d = document.createElement('button');
+            d.type = 'button'; d.className = 'car-dot';
+            d.setAttribute('aria-label', 'Show image ' + (i + 1));
+            d.setAttribute('aria-current', i === 0 ? 'true' : 'false');
+            d.addEventListener('click', function () { show(i); });
+            dots.push(d);
+            dotWrap.appendChild(d);
+          });
+          carousel.after(dotWrap);
+
+          // Keyboard
+          carousel.addEventListener('keydown', function (e) {
+            if (e.key === 'ArrowLeft') { show(current - 1); e.preventDefault(); }
+            if (e.key === 'ArrowRight') { show(current + 1); e.preventDefault(); }
+          });
+
+          // Swipe
+          var startX = null;
+          carousel.addEventListener('touchstart', function (e) { startX = e.touches[0].clientX; }, { passive: true });
+          carousel.addEventListener('touchend', function (e) {
+            if (startX === null) return;
+            var dx = e.changedTouches[0].clientX - startX;
+            if (Math.abs(dx) > 40) show(current + (dx < 0 ? 1 : -1));
+            startX = null;
+          });
+        }
+
+        slides[0].classList.add('active');
+      });
+    </script>
+  </body>
+</html>
