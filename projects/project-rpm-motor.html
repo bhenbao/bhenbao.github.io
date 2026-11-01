@@ -29,6 +29,11 @@
       .proj-container p { color: var(--muted); font-size: 1.05rem; max-width: 640px; margin: 0 0 1.4rem; }
       .proj-container strong { color: var(--white); }
 
+      /* Final-result photo */
+      .hero-photo { margin: 0 0 2.4rem; }
+      .hero-photo img { display: block; width: 100%; height: auto; border-radius: 32px 12px 32px 12px; border: 1.5px solid var(--line); }
+      .hero-photo figcaption { color: var(--muted); font-size: .88rem; margin-top: .7rem; }
+
       /* Manual carousel controls */
       .car-btn { position: absolute; top: 50%; transform: translateY(-50%); z-index: 2; width: 42px; height: 42px; border-radius: 50%; border: 1.5px solid var(--line); background: rgba(47, 36, 29, .75); color: var(--white); font-size: 1.5rem; line-height: 1; cursor: pointer; display: flex; align-items: center; justify-content: center; padding: 0 0 3px; }
       .car-btn:hover { background: var(--pink); color: var(--brown-dark); }
@@ -60,9 +65,16 @@
         <a class="back-link" href="/#work">‹ Back to projects</a>
 
         <h1>RPM Motor Controller</h1>
-        <span class="proj-meta">Circuits lab final project · Analog + digital design</span>
+        <span class="proj-meta">ENPH 259 Final Project · Analog + digital design</span>
 
         <p>For my circuits lab final project, I designed and built a closed-loop speed controller for a DC motor using only discrete ICs and op-amps, with no microcontroller. A dial sets the target speed, an optical sensor measures how fast the motor is actually spinning, and an integrating error amplifier adjusts the motor drive until the two match. Across the dial's range, the motor's speed scaled from about 400 to 4,000 RPM.</p>
+
+        <!-- ▼▼▼ FINAL RESULT PHOTO ▼▼▼ -->
+        <figure class="hero-photo">
+          <img src="/assets/images/rpm-final.jpg" alt="The finished motor speed controller: the circuit built on a breadboard and wired to the DC motor on its mounting bracket" />
+          <figcaption>The finished controller: the circuit on a breadboard, wired to the DC motor on its mounting bracket.</figcaption>
+        </figure>
+        <!-- ▲▲▲ END FINAL RESULT PHOTO ▲▲▲ -->
 
         <!-- ▼▼▼ BLOCK DIAGRAM ▼▼▼ -->
         <h2>How it works</h2>
